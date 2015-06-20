@@ -28,7 +28,7 @@
 <?php else : // or, if we don't have comments:
 	if ( ! comments_open() ) :
 ?>
-	<p class="nocomments"><?php _e( '评论已关闭！', 'lovnvns' ); ?></p>   
+	<p class="nocomments"><?php _e( '评论已关闭！', 'lovnvns' ); ?></p>
     <input type="hidden" id="comment_parent" name="comment_parent" value="" />
 <?php endif; // end ! comments_open() ?>
 
@@ -55,9 +55,9 @@
 <?php else : ?>
 <div id="form_info">
     <p>你的大名（必填）<br /><input type="text" name="author" id="author" value="<?php echo esc_attr($comment_author); ?>" tabindex="1" /></p><div class="clear"></div>
-    
+
     <p>你的邮箱（必填）<br /><input type="text" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>"  tabindex="2" /></p><div class="clear"></div>
-    
+
     <p>你的网站（选填）<br /><input type="text" name="url" id="url" value="<?php echo esc_attr($comment_author_url); ?>" tabindex="3" /></p><div class="clear"></div>
 </div>
 <?php endif; ?>
@@ -65,7 +65,7 @@
 	<p>评论内容（必填）<br /><textarea name="comment" id="comment" tabindex="4" rows="40" cols="43"></textarea></p>
 </div>
 <div class="clear"></div>
-<p id="bq"><?php wp_smilies();?></p>
+<!-- <p id="bq"><?php wp_smilies();?></p>-->
 <p><input type="submit" name="submit" value="提交评论" class="red" tabindex="5" />
 	<input class="red" name="reset" type="reset" id="reset" tabindex="6" value="<?php esc_attr_e( '重写' ); ?>" />
 <?php comment_id_fields(); ?>
