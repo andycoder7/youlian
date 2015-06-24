@@ -44,7 +44,7 @@ apache的配置文件/etc/apache2/apache2.conf中设置站点的AllowOverride �
 
 ### 上线时需要注意的
 
-#### 将正式网站的地址添加至数据库中
+(1)将正式网站的地址添加至数据库中
 
-修改**wp_options**表`option_name`为site_url和home的option_value为网站地址
+修改wp_options表option_name为site_url和home的option_value为网站地址
 
