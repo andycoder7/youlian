@@ -1,8 +1,6 @@
 # 项目安装配置说明
 ### clone代码
 
-代码地址：git@git.oschina.net:iatboy/youlian.git
-
 checkout dev分支，测试无误后合并到master
 
 修改wp-config.php数据库相关配置
