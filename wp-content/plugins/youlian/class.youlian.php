@@ -30,23 +30,21 @@ class Youlian {
 	//显示配置页面
 	public static function display_config_html_page() {
 ?>
-    <div>
-        <h2>文章目录设置</h2>
-        <form method="post">
-            <?php /* 下面这行代码用来保存表单中内容到数据库 */
-            if ( 'save' == $_REQUEST['action'] )
-            update_option( ci_fontsize, $_REQUEST['ci_fontsize'] );
-            ?>
-            <p>
-                <textarea>
-                    name="ci_fontsize"
-                    id="ci_fontsize"
-                    cols="40"
-                    rows="6"><?php echo get_option('ci_fontsize'); ?></textarea>
-            </p>
+	   <div>
+		    <h2>文章目录设置</h2>
+				<form method="post">
+					<?php /* 下面这行代码用来保存表单中内容到数据库 */
+						if ( 'save' == $_REQUEST['action'] )
+							update_option( ci_fontsize, $_REQUEST['ci_fontsize'] );
+					?>
+				<p>
+					<label>锭距</label>
+					<input type="text" name="dingju" value=<?php echo get_option('dingju');?>>
+					<label>展距</label>
+					<input type="text" name="zhanju" value=<?php echo get_option('zhanju');?>>
+	            <p>
 
-            <p>
-                <input type="submit" name="action" value="save" class="button-primary" />
+                <input type="submit" name="action" value="保存" class="button-primary" />
             </p>
         </form>
     </div>
