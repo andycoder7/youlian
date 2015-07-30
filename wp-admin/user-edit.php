@@ -397,11 +397,15 @@ if ( is_multisite() && is_network_admin() && ! IS_PROFILE_PAGE && current_user_c
 <table class="form-table">
 <tr class="user-email-wrap">
 	<th><label for="email"><?php _e('E-mail'); ?> <span class="description"><?php _e('(required)'); ?></span></label></th>
-	<td><input type="email" name="email" id="email" value="<?php echo esc_attr( $profileuser->user_email ) ?>" class="regular-text ltr" />
+	<td><input type="email" name="email" id="email" value="<?php echo esc_attr( $profileuser->user_email ) ?>" class="regular-text ltr" /></td>
+</tr>
+<tr class="user-email-wrap">
 	<th><label for="tel">手机 <span class="description"><?php _e('(required)'); ?></span></label></th>
-	<td><input type="text" name="tel" id="tel" value="<?php echo esc_attr( $profileuser->tel ) ?>" class="regular-text ltr" />
+	<td><input type="text" name="tel" id="tel" value="<?php echo esc_attr( $profileuser->tel ) ?>" class="regular-text ltr" /></td>
+</tr>
+<tr class="user-email-wrap">
 	<th><label for="position">职位 <span class="description"><?php _e('(required)'); ?></span></label></th>
-	<td><input type="text" name="position" id="position" value="<?php echo esc_attr( $profileuser->position ) ?>" class="regular-text ltr" />
+	<td><input type="text" name="position" id="position" value="<?php echo esc_attr( $profileuser->position ) ?>" class="regular-text ltr" /></td>
 	<?php
 	$new_email = get_option( $current_user->ID . '_new_email' );
 	if ( $new_email && $new_email['newemail'] != $current_user->user_email && $profileuser->ID == $current_user->ID ) : ?>
