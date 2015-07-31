@@ -95,22 +95,22 @@ class Youlian {
 	            <p>
 
 				<p>
-					<label>核心设备价格：</label>
+					<label style="display:inline-block;width:110px;">核心设备价格：</label>
 					<input type="text" name="hexinshebeijiage" style="width:100px" value=<?php echo get_option('hexinshebeijiage');?>>
 				<p>
 
 				<p>
-					<label>银行年利率：</label>
+					<label style="display:inline-block;width:110px;">银行年利率：</label>
 					<input type="text" name="yinhangnianlilv" style="width:100px" value=<?php echo get_option('yinhangnianlilv');?>>
 				</p>
 
 				<p>
-					<label>首付折扣：</label>
+					<label style="display:inline-block;width:110px;">首付折扣：</label>
 					<input type="text" name="shoufuzhekou" style="width:100px" value=<?php echo get_option('shoufuzhekou');?>>
 				</p>
 
 				<p>
-					<label>发货前付到折扣：</label>
+					<label style="display:inline-block;width:110px;">发货前付到折扣：</label>
 					<input type="text" name="fahuoqianfudaozhekou" style="width:100px" value=<?php echo get_option('fahuoqianfudaozhekou');?>>
 				</p>
                 <input type="submit" name="action" value="保存" class="button-primary" />
