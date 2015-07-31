@@ -1,4 +1,8 @@
 <?php
+if($_POST)
+{
+
+}
  get_header('meta');
  get_header();
  ?>
@@ -30,6 +34,7 @@
 <label id="fahuoqianfudaotishi"></label>
 <label id="fahuoqianfudaodayushoufutishi"></label>
 <label id="anzhuangtiaoshiwantishi"></label>
+<form name="form" method="post">
 <table class="table" width="100%">
 	<tr>
 		<td colspan="2">
@@ -88,6 +93,13 @@
 			<input type="text" id="anzhuangtiaoshiwan" style="width:80px" onblur="calculate_percentage('anzhuangtiaoshiwan');">%
 		</td>
 	</tr>
+</table>
+<br />
+<button onclick="jisuanjiage();">计算价格</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<button onclick="qingkongchongsuan();">清空重算</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<br />
+<br />
+<table class="table" width="100%">
 	<tr>
 		<td>
 			<label style="display:inline-block;width:114px">优惠前总价：</label>
@@ -118,11 +130,7 @@
 	</tr>
 </table>
 <br />
-<button onclick="jisuanjiage();">计算价格</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<button onclick="qingkongchongsuan();">清空重算</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <button onclick="baoliufangan();">保留方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<button onclick="qingkongfangan();">清空方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<button onclick="jisuanzonge();">计算总额</button>
 <br />
 <br />
 <legend>方案对比</legend>
@@ -144,7 +152,13 @@
 			<th>优惠</th>
 		</tr>
 	</table>
+</form>
 </div>
+<br />
+<button onclick="jisuanzonge();">计算总额</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<button onclick="jisuanzonge();">删除勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<button onclick="qingkongfangan();">编辑勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<br />
 <br />
 <label><b>优惠前总金额：</b></label>
 <label id = "youhuiqianzongjine" style="display:inline-block;width:160px"></label>
@@ -189,19 +203,27 @@
 			return false;
 		}
 
-		var zongjine = taishu * (dingshu * dingju + 350000) * zhanju;
+		var hexinshebeijiage = <?php echo get_option('hexinshebeijiage');?>;
+		var zongjine = taishu * (dingshu * dingju + hexinshebeijiage) * zhanju;
 		//var zongjine = 500000;
 		var youhuiqianzongjia = zongjine;
 		var zhibaojin = zongjine * 0.05;
-		var shoufuzhekou = (1 - 0.04 / 70 * (shoufu - 30));
-		var fahuoqianfudaozhekou = (1 - 0.02 / 35 * (fahuoqianfudao - 65));
-		var zongzhekou = shoufuzhekou * fahuoqianfudaozhekou;
-
+		var shoufuzhekou = <?php echo (double)get_option('shoufuzhekou');?>;
+		var fahuoqianfudaozhekou = <?php echo (double)get_option('fahuoqianfudaozhekou');?>;
 		if(window.console)
 		{
-			console.log("首付折扣：" + shoufuzhekou);
-			console.log("发货前付到折扣：" + fahuoqianfudaozhekou);
-			console.log("总折扣：" + zongzhekou);
+			console.log("首付折扣：" + shoufuzhekou + "折");
+			console.log("发货前付到折扣" + fahuoqianfudaozhekou + "折");
+		}
+
+		var shoufuzhekou = (1 - (1 - 0.1 * shoufuzhekou) / 70 * (shoufu - 30));
+		var fahuoqianfudaozhekou = (1 - (1 - 0.1 * fahuoqianfudaozhekou) / 35 * (fahuoqianfudao - 65));
+		var zongzhekou = shoufuzhekou * fahuoqianfudaozhekou;
+		if(window.console)
+		{
+			console.log("首付折扣（具体）：" + shoufuzhekou);
+			console.log("发货前付到折扣（具体）：" + fahuoqianfudaozhekou);
+			console.log("总折扣（具体）：" + zongzhekou);
 		}
 		if(document.getElementById("shifoubaoliuzhibaojin").checked)
 		{
@@ -215,7 +237,9 @@
 		{
 			var youhuihouzongjia = zongjine * zongzhekou;
 			if(window.console) console.log("减去银行利息前：" + youhuihouzongjia);
-			var yinhanglixi = youhuiqianzongjia * 0.05 * 0.08;
+			var yinhangnianlilv  = <?php echo (double)get_option('yinhangnianlilv');?>;
+			if(window.console) console.log("银行年利率：" + yinhangnianlilv);
+			var yinhanglixi = youhuiqianzongjia * 0.05 * (yinhangnianlilv / 100);
 			if(window.console) console.log("一年银行利息：" + yinhanglixi);
 			youhuihouzongjia = youhuihouzongjia - yinhanglixi;
 			if(window.console) console.log("优惠后总价：" + youhuihouzongjia);
