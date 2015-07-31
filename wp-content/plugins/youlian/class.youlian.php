@@ -22,7 +22,7 @@ class Youlian {
 		add_option("zhanju_value_4", "4.5", '', 'yes');
 
 		add_option("hexinshebeijiage", "350000", '', 'yes');
-		add_option("yinhangnianlilv", "", '', 'yes');
+		add_option("yinhangnianlilv", "8", '', 'yes');
 		add_option("shoufuzhekou", "9.6", '', 'yes');
 		add_option("fahuoqianfudaozhekou", "9.8", '', 'yes');
 	}
@@ -96,22 +96,22 @@ class Youlian {
 
 				<p>
 					<label style="display:inline-block;width:110px;">核心设备价格：</label>
-					<input type="text" name="hexinshebeijiage" style="width:100px" value=<?php echo get_option('hexinshebeijiage');?>>
+					<input type="text" name="hexinshebeijiage" style="width:100px" value=<?php echo get_option('hexinshebeijiage');?>>元
 				<p>
 
 				<p>
 					<label style="display:inline-block;width:110px;">银行年利率：</label>
-					<input type="text" name="yinhangnianlilv" style="width:100px" value=<?php echo get_option('yinhangnianlilv');?>>
+					<input type="text" name="yinhangnianlilv" style="width:100px" value=<?php echo get_option('yinhangnianlilv');?>>%
 				</p>
 
 				<p>
 					<label style="display:inline-block;width:110px;">首付折扣：</label>
-					<input type="text" name="shoufuzhekou" style="width:100px" value=<?php echo get_option('shoufuzhekou');?>>
+					<input type="text" name="shoufuzhekou" style="width:100px" value=<?php echo get_option('shoufuzhekou');?>>折
 				</p>
 
 				<p>
 					<label style="display:inline-block;width:110px;">发货前付到折扣：</label>
-					<input type="text" name="fahuoqianfudaozhekou" style="width:100px" value=<?php echo get_option('fahuoqianfudaozhekou');?>>
+					<input type="text" name="fahuoqianfudaozhekou" style="width:100px" value=<?php echo get_option('fahuoqianfudaozhekou');?>>折
 				</p>
                 <input type="submit" name="action" value="保存" class="button-primary" />
 				</p>
