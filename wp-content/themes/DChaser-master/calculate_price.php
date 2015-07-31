@@ -34,7 +34,7 @@
 	<tr>
 		<td colspan="2">
 			<label>机种：</label>
-			<select id="jizhong" style='width:292px;'>
+			<select id="jizhong">
 				<option value='YZJ-1型走架细纱机' selected>YZJ-1型走架细纱机</option>
 			</select>
 		<td>
@@ -52,19 +52,19 @@
 		<td>
 			<label>绽距：</label>
 			<select id="dingju">
-				<option value="415">50P</option>
-				<option value="425">55P</option>
-				<option value="435" selected>60P</option>
-				<option value="445">62P</option>
+				<option value=<?php echo get_option('dingju_key_1');?>><?php echo get_option('dingju_value_1');?>P</option>
+				<option value=<?php echo get_option('dingju_key_2');?>><?php echo get_option('dingju_value_2');?>P</option>
+				<option value=<?php echo get_option('dingju_key_3');?>><?php echo get_option('dingju_value_3');?>P</option>
+				<option value=<?php echo get_option('dingju_key_4');?>><?php echo get_option('dingju_value_4');?>P</option>
 			</select>
 		</td>
 		<td>
 			<label>展距：</label>
 			<select id="zhanju">
-				<option value="0.98">3M</option>
-				<option value="0.985">3.5M</option>
-				<option value="1" selected>4M</option>
-				<option value="1.025">4.5M</option>
+				<option value=<?php echo get_option('zhanju_key_1');?>><?php echo get_option('zhanju_value_1');?>P</option>
+				<option value=<?php echo get_option('zhanju_key_2');?>><?php echo get_option('zhanju_value_2');?>P</option>
+				<option value=<?php echo get_option('zhanju_key_3');?>><?php echo get_option('zhanju_value_3');?>P</option>
+				<option value=<?php echo get_option('zhanju_key_4');?>><?php echo get_option('zhanju_value_4');?>P</option>
 			</select>
 		</td>
 		<td>
