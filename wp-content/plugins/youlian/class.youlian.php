@@ -3,7 +3,28 @@ class Youlian {
 
 	//启用插件
 	public static function plugin_activation() {
-		add_option("display_copyright_text", "<p style='color:red'>本站点所有文章均为原创，转载请注明出处！</p>p>", '', 'yes');
+		add_option("dingju_key_1", "435", '', 'yes');
+		add_option("dingju_value_1", "60", '', 'yes');
+		add_option("dingju_key_2", "415", '', 'yes');
+		add_option("dingju_value_2", "50", '', 'yes');
+		add_option("dingju_key_3", "425", '', 'yes');
+		add_option("dingju_value_3", "55", '', 'yes');
+		add_option("dingju_key_4", "445", '', 'yes');
+		add_option("dingju_value_4", "62", '', 'yes');
+
+		add_option("zhanju_key_1", "1", '', 'yes');
+		add_option("zhanju_value_1", "4", '', 'yes');
+		add_option("zhanju_key_2", "0.98", '', 'yes');
+		add_option("zhanju_value_2", "3", '', 'yes');
+		add_option("zhanju_key_3", "0.985", '', 'yes');
+		add_option("zhanju_value_3", "3.5", '', 'yes');
+		add_option("zhanju_key_4", "1.025", '', 'yes');
+		add_option("zhanju_value_4", "4.5", '', 'yes');
+
+		add_option("hexinshebeijiage", "350000", '', 'yes');
+		add_option("yinhangnianlilv", "", '', 'yes');
+		add_option("shoufuzhekou", "9.6", '', 'yes');
+		add_option("fahuoqianfudaozhekou", "9.8", '', 'yes');
 	}
 
 	//停用插件
@@ -31,7 +52,7 @@ class Youlian {
 	public static function display_config_html_page() {
 ?>
 	   <div>
-		    <h2>文章目录设置</h2>
+		    <h2>参数配置</h2>
 				<form method="post">
 					<?php /* 下面这行代码用来保存表单中内容到数据库 */
 						if ( 'save' == $_REQUEST['action'] )
@@ -39,13 +60,61 @@ class Youlian {
 					?>
 				<p>
 					<label>锭距</label>
-					<input type="text" name="dingju" value=<?php echo get_option('dingju');?>>
-					<label>展距</label>
-					<input type="text" name="zhanju" value=<?php echo get_option('zhanju');?>>
+				</p>
+				<p>
+					<input type="text" name="dingju_key_1" style="width:60px" value=<?php echo get_option('dingju_key_1');?>>=>
+					<input type="text" name="dingju_value_1" style="width:60px" value=<?php echo get_option('dingju_value_1');?>>P（默认）
+					<br />
+					<input type="text" name="dingju_key_2" style="width:60px" value=<?php echo get_option('dingju_key_2');?>>=>
+					<input type="text" name="dingju_value_2" style="width:60px" value=<?php echo get_option('dingju_value_2');?>>P
+					<br />
+					<input type="text" name="dingju_key_3" style="width:60px" value=<?php echo get_option('dingju_key_3');?>>=>
+					<input type="text" name="dingju_value_3" style="width:60px" value=<?php echo get_option('dingju_value_3');?>>P
+					<br />
+					<input type="text" name="dingju_key_4" style="width:60px" value=<?php echo get_option('dingju_key_4');?>>=>
+					<input type="text" name="dingju_value_4" style="width:60px" value=<?php echo get_option('dingju_value_4');?>>P
+					<br />
 	            <p>
 
+				<p>
+					<label>展距</label>
+				</p>
+				<p>
+					<input type="text" name="zhanju_key_1" style="width:60px" value=<?php echo get_option('zhanju_key_1');?>>=>
+					<input type="text" name="zhanju_value_1" style="width:60px" value=<?php echo get_option('zhanju_value_1');?>>M（默认）
+					<br />
+					<input type="text" name="zhanju_key_2" style="width:60px" value=<?php echo get_option('zhanju_key_2');?>>=>
+					<input type="text" name="zhanju_value_2" style="width:60px" value=<?php echo get_option('zhanju_value_2');?>>P
+					<br />
+					<input type="text" name="zhanju_key_3" style="width:60px" value=<?php echo get_option('zhanju_key_3');?>>=>
+					<input type="text" name="zhanju_value_3" style="width:60px" value=<?php echo get_option('zhanju_value_3');?>>P
+					<br />
+					<input type="text" name="zhanju_key_4" style="width:60px" value=<?php echo get_option('zhanju_key_4');?>>=>
+					<input type="text" name="zhanju_value_4" style="width:60px" value=<?php echo get_option('zhanju_value_4');?>>P
+					<br />
+	            <p>
+
+				<p>
+					<label>核心设备价格：</label>
+					<input type="text" name="hexinshebeijiage" style="width:100px" value=<?php echo get_option('hexinshebeijiage');?>>
+				<p>
+
+				<p>
+					<label>银行年利率：</label>
+					<input type="text" name="yinhangnianlilv" style="width:100px" value=<?php echo get_option('yinhangnianlilv');?>>
+				</p>
+
+				<p>
+					<label>首付折扣：</label>
+					<input type="text" name="shoufuzhekou" style="width:100px" value=<?php echo get_option('shoufuzhekou');?>>
+				</p>
+
+				<p>
+					<label>发货前付到折扣：</label>
+					<input type="text" name="fahuoqianfudaozhekou" style="width:100px" value=<?php echo get_option('fahuoqianfudaozhekou');?>>
+				</p>
                 <input type="submit" name="action" value="保存" class="button-primary" />
-            </p>
+				</p>
         </form>
     </div>
 <?php
