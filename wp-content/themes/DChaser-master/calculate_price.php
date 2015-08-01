@@ -1,8 +1,4 @@
 <?php
-if($_POST)
-{
-
-}
  get_header('meta');
  get_header();
  ?>
@@ -94,6 +90,7 @@ if($_POST)
 		</td>
 	</tr>
 </table>
+</form>
 <br />
 <button onclick="jisuanjiage();">计算价格</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <button onclick="qingkongchongsuan();">清空重算</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -152,7 +149,7 @@ if($_POST)
 			<th>优惠</th>
 		</tr>
 	</table>
-</form>
+<!--</form>-->
 </div>
 <br />
 <button onclick="jisuanzonge();">计算总额</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -362,6 +359,34 @@ if($_POST)
 		newTd[8].innerHTML = Math.round(details[8]*100)/100;
 		var youhui = details[7] - details[8];
 		newTd[9].innerHTML = Math.round(youhui*100)/100;
+
+		// var data = new Array('shoufu':shoufu);
+		// data['shoufu'] = shoufu;
+		$.ajax({
+			url : "<?php echo get_option('siteurl'); ?>/wp-youlian-config.php",
+            type : "POST",
+            data : {shoufu:shoufu},
+
+            datatype : "text",
+
+            beforeSend : function() {
+				// console.log(url);
+                console.log("beforeSend");
+            },
+            success : function(data) {
+                // $("#checkname").html(data);
+				// alert(data);
+				console.log(data);
+                console.log("success");
+            },
+            error : function() {
+                // $("#checkname").html("error");
+                console.log("error");
+            },
+            complete : function() {
+                console.log("complete");
+            },
+        });
 	}
 
 	//清空方案
