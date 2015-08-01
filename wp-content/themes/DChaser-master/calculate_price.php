@@ -23,14 +23,30 @@
 		border:1px solid #ccc;
 	}
 </style>
-<legend>报价方案</legend>
 <label id="taishutishi"></label>
 <label id="dingshutishi"></label>
 <label id="shoufutishi"></label>
 <label id="fahuoqianfudaotishi"></label>
 <label id="fahuoqianfudaodayushoufutishi"></label>
 <label id="anzhuangtiaoshiwantishi"></label>
-<form name="form" method="post">
+<legend>联系方式</legend>
+<table class="table" width="100%">
+	<tr>
+		<td>
+			<label>姓名：</label>
+			<input id="name" type="text" value=<?php if(isset($_COOKIE['name'])) echo $_COOKIE['name'];?>>
+		</td>
+		<td>
+			<label>电话：</label>
+			<input id="tel" type="text" value=<?php if(isset($_COOKIE['tel'])) echo $_COOKIE['tel'];?>>
+		</td>
+		<td>
+			<label>邮箱：</label>
+			<input id="email" type="text" value=<?php if(isset($_COOKIE['email'])) echo $_COOKIE['email'];?>>
+		</td>
+	</tr>
+</table>
+<legend>报价方案</legend>
 <table class="table" width="100%">
 	<tr>
 		<td colspan="2">
@@ -90,7 +106,6 @@
 		</td>
 	</tr>
 </table>
-</form>
 <br />
 <button onclick="jisuanjiage();">计算价格</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <button onclick="qingkongchongsuan();">清空重算</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -369,12 +384,17 @@
 		var youhui = details[7] - details[8];
 		newTd[9].innerHTML = Math.round(youhui*100)/100;
 
-		// var data = new Array('shoufu':shoufu);
-		// data['shoufu'] = shoufu;
+		var name = document.getElementById('name').value;
+		var tel = document.getElementById('tel').value;
+		var email = document.getElementById('email').value;
+
 		$.ajax({
 			url : "<?php echo get_option('siteurl'); ?>/wp-youlian-config.php",
             type : "POST",
-			data : {jizhong : jizhong,
+			data : {name : name,
+					tel : tel,
+					email : email,
+					jizhong : jizhong,
 					taishu : taishu,
 					dingshu : dingshu,
 					dingju : dingju,
@@ -393,17 +413,13 @@
             datatype : "text",
 
             beforeSend : function() {
-				// console.log(url);
                 console.log("beforeSend");
             },
             success : function(data) {
-                // $("#checkname").html(data);
-				// alert(data);
 				console.log(data);
                 console.log("success");
             },
             error : function() {
-                // $("#checkname").html("error");
                 console.log("error");
             },
             complete : function() {
