@@ -382,12 +382,13 @@
 					shoufu : shoufu,
 					fahuoqianfudao : fahuoqianfudao,
 					anzhuangtiaoshiwan : anzhuangtiaoshiwan,
-					youhuiqianzongjia : youhuiqianzongjia,
+					youhuiqianzongjia : Math.round(youhuiqianzongjia*100)/100,
 					shoufukuan : shoufukuan,
 					fahuoqianfukuan : fahuoqianfukuan,
 					anzhuangtiaoshiwanfukuan : anzhuangtiaoshiwanfukuan,
 					zhibaojin : zhibaojin,
-					youhuihouzongjia : youhuihouzongjia,
+					youhuihouzongjia : Math.round(youhuihouzongjia*100)/100,
+					youhui : Math.round((youhuiqianzongjia - youhuihouzongjia)*100)/100
 					},
             datatype : "text",
 
