@@ -29,7 +29,7 @@
 <label id="fahuoqianfudaotishi"></label>
 <label id="fahuoqianfudaodayushoufutishi"></label>
 <label id="anzhuangtiaoshiwantishi"></label>
-<legend>联系方式</legend>
+<legend>顾客信息</legend>
 <table class="table" width="100%">
 	<tr>
 		<td>
