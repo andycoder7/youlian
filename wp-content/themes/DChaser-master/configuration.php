@@ -35,23 +35,24 @@
 <label id="fahuoqianfudaotishi"></label>
 <label id="fahuoqianfudaodayushoufutishi"></label>
 <label id="anzhuangtiaoshiwantishi"></label>
-<!--
 <legend>顾客信息</legend>
-<table width="100%">
+<table class="table" width="100%">
 	<tr>
 		<td>
 			<label>姓名：</label>
-			<input type="text" name="name">
+			<input id="name" type="text" value=<?php if(isset($_COOKIE['name'])) echo $_COOKIE['name'];?>>
+		</td>
 		<td>
-			<label>手机：</label>
-			<input type="text" name="tel"></td>
+			<label>电话：</label>
+			<input id="tel" type="text" value=<?php if(isset($_COOKIE['tel'])) echo $_COOKIE['tel'];?>>
+		</td>
 		<td>
 			<label>邮箱：</label>
-			<input type="text" name="email">
+			<input id="email" type="text" value=<?php if(isset($_COOKIE['email'])) echo $_COOKIE['email'];?>>
 		</td>
 	</tr>
 </table>
-<br />-->
+<br />
 <legend>配置方案</legend>
 <table class="table" width="100%">
 	<tr>
