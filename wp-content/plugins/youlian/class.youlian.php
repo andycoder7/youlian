@@ -25,6 +25,39 @@ class Youlian {
 		add_option("yinhangnianlilv", "8", '', 'yes');
 		add_option("shoufuzhekou", "9.6", '', 'yes');
 		add_option("fahuoqianfudaozhekou", "9.8", '', 'yes');
+
+		global $wpdb;
+		$table_name = $wpdb->prefix . "youlian_config";
+		if($wpdb->get_var("show tables like '$table_name'") != $table_name) {
+			$sql = "CREATE TABLE `wp_youlian_logs` (
+						`id` int(11) NOT NULL AUTO_INCREMENT,
+						`name` varchar(20) DEFAULT NULL,
+						`tel` varchar(11) DEFAULT NULL,
+						`email` varchar(30) DEFAULT NULL,
+						`ip` varchar(20) DEFAULT NULL,
+						`city` varchar(20) DEFAULT NULL,
+						`create_time` datetime DEFAULT NULL,
+						`jizhong` varchar(30) DEFAULT NULL,
+						`taishu` int(11) DEFAULT NULL,
+						`dingshu` int(11) DEFAULT NULL,
+						`dingju` varchar(5) DEFAULT NULL,
+						`zhanju` varchar(5) DEFAULT NULL,
+						`shoufu` varchar(5) DEFAULT NULL,
+						`fahuoqianfudao` varchar(5) DEFAULT NULL,
+						`anzhuangtiaoshiwan` varchar(5) DEFAULT NULL,
+						`youhuiqianzongjia` double DEFAULT NULL,
+						`shoufukuan` double DEFAULT NULL,
+						`fahuoqianfukuan` double DEFAULT NULL,
+						`anzhuangtiaoshiwanfukuan` double DEFAULT NULL,
+						`zhibaojin` double DEFAULT NULL,
+						`youhuihouzongjia` double DEFAULT NULL,
+						`youhui` double DEFAULT NULL,
+						PRIMARY KEY (`id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
+			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+			dbDelta($sql);
+		}
 	}
 
 	//停用插件
