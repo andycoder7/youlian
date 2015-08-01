@@ -277,6 +277,7 @@
 	function baoliufangan()
 	{
 		var flag = true;
+		var jizhong = document.getElementById("jizhong").value;
 		var taishu = document.getElementById("taishu").value;
 		var dingshu = document.getElementById("dingshu").value;
 		var dingju = document.getElementById("dingju").value;
@@ -312,15 +313,23 @@
 		}
 		var results = document.getElementById("results");
 		var rows = results.rows.length;
+
+		var shoufukuan = document.getElementById("shoufukuan").value;
+		var fahuoqianfukuan = document.getElementById("fahuoqianfukuan").value;
+		var anzhuangtiaoshiwanfukuan = document.getElementById("anzhuangtiaoshiwanfukuan").value;
+		var zhibaojin = document.getElementById("zhibaojin").value;
+		var youhuiqianzongjia = document.getElementById("youhuiqianzongjia").value;
+		var youhuihouzongjia = document.getElementById("youhuihouzongjia").value;
+
 		var details = new Array();
-		details[1] = document.getElementById("jizhong").value;
-		details[2] = document.getElementById("taishu").value;
-		details[3] = document.getElementById("shoufukuan").value;
-		details[4] = document.getElementById("fahuoqianfukuan").value;
-		details[5] = document.getElementById("anzhuangtiaoshiwanfukuan").value;
-		details[6] = document.getElementById("zhibaojin").value;
-		details[7] = document.getElementById("youhuiqianzongjia").value;
-		details[8] = document.getElementById("youhuihouzongjia").value;
+		details[1] = jizhong;
+		details[2] = taishu;
+		details[3] = shoufukuan;
+		details[4] = fahuoqianfukuan;
+		details[5] = anzhuangtiaoshiwanfukuan;
+		details[6] = zhibaojin;
+		details[7] = youhuiqianzongjia;
+		details[8] = youhuihouzongjia;
 
 		if(rows > 1)
 		{
@@ -365,8 +374,21 @@
 		$.ajax({
 			url : "<?php echo get_option('siteurl'); ?>/wp-youlian-config.php",
             type : "POST",
-            data : {shoufu:shoufu},
-
+			data : {jizhong : jizhong,
+					taishu : taishu,
+					dingshu : dingshu,
+					dingju : dingju,
+					zhanju : zhanju,
+					shoufu : shoufu,
+					fahuoqianfudao : fahuoqianfudao,
+					anzhuangtiaoshiwan : anzhuangtiaoshiwan,
+					youhuiqianzongjia : youhuiqianzongjia,
+					shoufukuan : shoufukuan,
+					fahuoqianfukuan : fahuoqianfukuan,
+					anzhuangtiaoshiwanfukuan : anzhuangtiaoshiwanfukuan,
+					zhibaojin : zhibaojin,
+					youhuihouzongjia : youhuihouzongjia,
+					},
             datatype : "text",
 
             beforeSend : function() {
