@@ -13,12 +13,9 @@ if ( ! current_user_can( 'list_users' ) )
 	wp_die( __( 'Cheatin&#8217; uh?' ), 403 );
 
 $wp_list_table = _get_list_table('WP_Logs_List_Table');
-var_dump($wp_list_table);
-exit;
 $pagenum = $wp_list_table->get_pagenum();
-var_dump($pagenum);
-$title = __('Users');
-$parent_file = 'users.php';
+$title = '访问日志';
+$parent_file = 'logs.php';
 
 add_screen_option( 'per_page' );
 

@@ -40,8 +40,8 @@ class WP_Logs_List_Table extends WP_List_Table {
 	 */
 	public function __construct( $args = array() ) {
 		parent::__construct( array(
-			'singular' => 'user',
-			'plural'   => 'users',
+			'singular' => 'log',
+			'plural'   => 'logs',
 			'screen'   => isset( $args['screen'] ) ? $args['screen'] : null,
 		) );
 
@@ -103,7 +103,7 @@ class WP_Logs_List_Table extends WP_List_Table {
 			$args['order'] = $_REQUEST['order'];
 
 		// Query the user IDs for this page
-		$wp_user_search = new WP_User_Query( $args );
+		$wp_user_search = new WP_Logs_Query( $args );
 
 		$this->items = $wp_user_search->get_results();
 
