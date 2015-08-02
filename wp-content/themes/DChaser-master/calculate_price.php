@@ -23,18 +23,35 @@
 		border:1px solid #ccc;
 	}
 </style>
-<legend>报价方案</legend>
 <label id="taishutishi"></label>
 <label id="dingshutishi"></label>
 <label id="shoufutishi"></label>
 <label id="fahuoqianfudaotishi"></label>
 <label id="fahuoqianfudaodayushoufutishi"></label>
 <label id="anzhuangtiaoshiwantishi"></label>
+<legend>顾客信息</legend>
+<table class="table" width="100%">
+	<tr>
+		<td>
+			<label>姓名：</label>
+			<input id="name" type="text" value=<?php if(isset($_COOKIE['name'])) echo $_COOKIE['name'];?>>
+		</td>
+		<td>
+			<label>电话：</label>
+			<input id="tel" type="text" value=<?php if(isset($_COOKIE['tel'])) echo $_COOKIE['tel'];?>>
+		</td>
+		<td>
+			<label>邮箱：</label>
+			<input id="email" type="text" value=<?php if(isset($_COOKIE['email'])) echo $_COOKIE['email'];?>>
+		</td>
+	</tr>
+</table>
+<legend>报价方案</legend>
 <table class="table" width="100%">
 	<tr>
 		<td colspan="2">
 			<label>机种：</label>
-			<select id="jizhong" style='width:292px;'>
+			<select id="jizhong">
 				<option value='YZJ-1型走架细纱机' selected>YZJ-1型走架细纱机</option>
 			</select>
 		<td>
@@ -52,19 +69,19 @@
 		<td>
 			<label>绽距：</label>
 			<select id="dingju">
-				<option value="415">50P</option>
-				<option value="425">55P</option>
-				<option value="435" selected>60P</option>
-				<option value="445">62P</option>
+				<option value=<?php echo get_option('dingju_key_1');?>><?php echo get_option('dingju_value_1');?>P</option>
+				<option value=<?php echo get_option('dingju_key_2');?>><?php echo get_option('dingju_value_2');?>P</option>
+				<option value=<?php echo get_option('dingju_key_3');?>><?php echo get_option('dingju_value_3');?>P</option>
+				<option value=<?php echo get_option('dingju_key_4');?>><?php echo get_option('dingju_value_4');?>P</option>
 			</select>
 		</td>
 		<td>
 			<label>展距：</label>
 			<select id="zhanju">
-				<option value="0.98">3M</option>
-				<option value="0.985">3.5M</option>
-				<option value="1" selected>4M</option>
-				<option value="1.025">4.5M</option>
+				<option value=<?php echo get_option('zhanju_key_1');?>><?php echo get_option('zhanju_value_1');?>P</option>
+				<option value=<?php echo get_option('zhanju_key_2');?>><?php echo get_option('zhanju_value_2');?>P</option>
+				<option value=<?php echo get_option('zhanju_key_3');?>><?php echo get_option('zhanju_value_3');?>P</option>
+				<option value=<?php echo get_option('zhanju_key_4');?>><?php echo get_option('zhanju_value_4');?>P</option>
 			</select>
 		</td>
 		<td>
@@ -88,6 +105,13 @@
 			<input type="text" id="anzhuangtiaoshiwan" style="width:80px" onblur="calculate_percentage('anzhuangtiaoshiwan');">%
 		</td>
 	</tr>
+</table>
+<br />
+<button onclick="jisuanjiage();">计算价格</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<button onclick="qingkongchongsuan();">清空重算</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<br />
+<br />
+<table class="table" width="100%">
 	<tr>
 		<td>
 			<label style="display:inline-block;width:114px">优惠前总价：</label>
@@ -118,11 +142,7 @@
 	</tr>
 </table>
 <br />
-<button onclick="jisuanjiage();">计算价格</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<button onclick="qingkongchongsuan();">清空重算</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 <button onclick="baoliufangan();">保留方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<button onclick="qingkongfangan();">清空方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<button onclick="jisuanzonge();">计算总额</button>
 <br />
 <br />
 <legend>方案对比</legend>
@@ -144,7 +164,13 @@
 			<th>优惠</th>
 		</tr>
 	</table>
+<!--</form>-->
 </div>
+<br />
+<button onclick="jisuanzonge();">计算总额</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<button onclick="jisuanzonge();">删除勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<button onclick="qingkongfangan();">编辑勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<br />
 <br />
 <label><b>优惠前总金额：</b></label>
 <label id = "youhuiqianzongjine" style="display:inline-block;width:160px"></label>
@@ -189,19 +215,27 @@
 			return false;
 		}
 
-		var zongjine = taishu * (dingshu * dingju + 350000) * zhanju;
+		var hexinshebeijiage = <?php echo get_option('hexinshebeijiage');?>;
+		var zongjine = taishu * (dingshu * dingju + hexinshebeijiage) * zhanju;
 		//var zongjine = 500000;
 		var youhuiqianzongjia = zongjine;
 		var zhibaojin = zongjine * 0.05;
-		var shoufuzhekou = (1 - 0.04 / 70 * (shoufu - 30));
-		var fahuoqianfudaozhekou = (1 - 0.02 / 35 * (fahuoqianfudao - 65));
-		var zongzhekou = shoufuzhekou * fahuoqianfudaozhekou;
-
+		var shoufuzhekou = <?php echo (double)get_option('shoufuzhekou');?>;
+		var fahuoqianfudaozhekou = <?php echo (double)get_option('fahuoqianfudaozhekou');?>;
 		if(window.console)
 		{
-			console.log("首付折扣：" + shoufuzhekou);
-			console.log("发货前付到折扣：" + fahuoqianfudaozhekou);
-			console.log("总折扣：" + zongzhekou);
+			console.log("首付折扣：" + shoufuzhekou + "折");
+			console.log("发货前付到折扣" + fahuoqianfudaozhekou + "折");
+		}
+
+		var shoufuzhekou = (1 - (1 - 0.1 * shoufuzhekou) / 70 * (shoufu - 30));
+		var fahuoqianfudaozhekou = (1 - (1 - 0.1 * fahuoqianfudaozhekou) / 35 * (fahuoqianfudao - 65));
+		var zongzhekou = shoufuzhekou * fahuoqianfudaozhekou;
+		if(window.console)
+		{
+			console.log("首付折扣（具体）：" + shoufuzhekou);
+			console.log("发货前付到折扣（具体）：" + fahuoqianfudaozhekou);
+			console.log("总折扣（具体）：" + zongzhekou);
 		}
 		if(document.getElementById("shifoubaoliuzhibaojin").checked)
 		{
@@ -215,7 +249,9 @@
 		{
 			var youhuihouzongjia = zongjine * zongzhekou;
 			if(window.console) console.log("减去银行利息前：" + youhuihouzongjia);
-			var yinhanglixi = youhuiqianzongjia * 0.05 * 0.08;
+			var yinhangnianlilv  = <?php echo (double)get_option('yinhangnianlilv');?>;
+			if(window.console) console.log("银行年利率：" + yinhangnianlilv);
+			var yinhanglixi = youhuiqianzongjia * 0.05 * (yinhangnianlilv / 100);
 			if(window.console) console.log("一年银行利息：" + yinhanglixi);
 			youhuihouzongjia = youhuihouzongjia - yinhanglixi;
 			if(window.console) console.log("优惠后总价：" + youhuihouzongjia);
@@ -256,6 +292,7 @@
 	function baoliufangan()
 	{
 		var flag = true;
+		var jizhong = document.getElementById("jizhong").value;
 		var taishu = document.getElementById("taishu").value;
 		var dingshu = document.getElementById("dingshu").value;
 		var dingju = document.getElementById("dingju").value;
@@ -291,15 +328,23 @@
 		}
 		var results = document.getElementById("results");
 		var rows = results.rows.length;
+
+		var shoufukuan = document.getElementById("shoufukuan").value;
+		var fahuoqianfukuan = document.getElementById("fahuoqianfukuan").value;
+		var anzhuangtiaoshiwanfukuan = document.getElementById("anzhuangtiaoshiwanfukuan").value;
+		var zhibaojin = document.getElementById("zhibaojin").value;
+		var youhuiqianzongjia = document.getElementById("youhuiqianzongjia").value;
+		var youhuihouzongjia = document.getElementById("youhuihouzongjia").value;
+
 		var details = new Array();
-		details[1] = document.getElementById("jizhong").value;
-		details[2] = document.getElementById("taishu").value;
-		details[3] = document.getElementById("shoufukuan").value;
-		details[4] = document.getElementById("fahuoqianfukuan").value;
-		details[5] = document.getElementById("anzhuangtiaoshiwanfukuan").value;
-		details[6] = document.getElementById("zhibaojin").value;
-		details[7] = document.getElementById("youhuiqianzongjia").value;
-		details[8] = document.getElementById("youhuihouzongjia").value;
+		details[1] = jizhong;
+		details[2] = taishu;
+		details[3] = shoufukuan;
+		details[4] = fahuoqianfukuan;
+		details[5] = anzhuangtiaoshiwanfukuan;
+		details[6] = zhibaojin;
+		details[7] = youhuiqianzongjia;
+		details[8] = youhuihouzongjia;
 
 		if(rows > 1)
 		{
@@ -338,6 +383,49 @@
 		newTd[8].innerHTML = Math.round(details[8]*100)/100;
 		var youhui = details[7] - details[8];
 		newTd[9].innerHTML = Math.round(youhui*100)/100;
+
+		var name = document.getElementById('name').value;
+		var tel = document.getElementById('tel').value;
+		var email = document.getElementById('email').value;
+
+		$.ajax({
+			url : "<?php echo get_option('siteurl'); ?>/wp-youlian-config.php",
+            type : "POST",
+			data : {name : name,
+					tel : tel,
+					email : email,
+					jizhong : jizhong,
+					taishu : taishu,
+					dingshu : dingshu,
+					dingju : dingju,
+					zhanju : zhanju,
+					shoufu : shoufu,
+					fahuoqianfudao : fahuoqianfudao,
+					anzhuangtiaoshiwan : anzhuangtiaoshiwan,
+					youhuiqianzongjia : Math.round(youhuiqianzongjia*100)/100,
+					shoufukuan : shoufukuan,
+					fahuoqianfukuan : fahuoqianfukuan,
+					anzhuangtiaoshiwanfukuan : anzhuangtiaoshiwanfukuan,
+					zhibaojin : zhibaojin,
+					youhuihouzongjia : Math.round(youhuihouzongjia*100)/100,
+					youhui : Math.round((youhuiqianzongjia - youhuihouzongjia)*100)/100
+					},
+            datatype : "text",
+
+            beforeSend : function() {
+                console.log("beforeSend");
+            },
+            success : function(data) {
+				console.log(data);
+                console.log("success");
+            },
+            error : function() {
+                console.log("error");
+            },
+            complete : function() {
+                console.log("complete");
+            },
+        });
 	}
 
 	//清空方案

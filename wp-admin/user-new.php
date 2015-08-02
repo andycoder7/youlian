@@ -348,6 +348,8 @@ $new_user_login = $creating && isset( $_POST['user_login'] ) ? wp_unslash( $_POS
 $new_user_firstname = $creating && isset( $_POST['first_name'] ) ? wp_unslash( $_POST['first_name'] ) : '';
 $new_user_lastname = $creating && isset( $_POST['last_name'] ) ? wp_unslash( $_POST['last_name'] ) : '';
 $new_user_email = $creating && isset( $_POST['email'] ) ? wp_unslash( $_POST['email'] ) : '';
+$new_user_tel = $creating && isset( $_POST['tel'] ) ? wp_unslash( $_POST['tel'] ) : '';
+$new_user_position = $creating && isset( $_POST['position'] ) ? wp_unslash( $_POST['position'] ) : '';
 $new_user_uri = $creating && isset( $_POST['url'] ) ? wp_unslash( $_POST['url'] ) : '';
 $new_user_role = $creating && isset( $_POST['role'] ) ? wp_unslash( $_POST['role'] ) : '';
 $new_user_send_password = $creating && isset( $_POST['send_password'] ) ? wp_unslash( $_POST['send_password'] ) : '';
@@ -363,6 +365,14 @@ $new_user_ignore_pass = $creating && isset( $_POST['noconfirmation'] ) ? wp_unsl
 		<th scope="row"><label for="email"><?php _e('E-mail'); ?> <span class="description"><?php _e('(required)'); ?></span></label></th>
 		<td><input name="email" type="email" id="email" value="<?php echo esc_attr( $new_user_email ); ?>" /></td>
 	</tr>
+	<tr class="form-field form-required">
+		<th scope="row"><label for="tel">手机<span class="description"><?php _e('(required)'); ?></span></label></th>
+		<td><input name="tel" type="text" id="tel" value="<?php echo esc_attr( $new_user_tel ); ?>" /></td>
+	</tr>
+	<tr class="form-field form-required">
+		<th scope="row"><label for="position">职位<span class="description"><?php _e('(required)'); ?></span></label></th>
+		<td><input name="position" type="text" id="position" value="<?php echo esc_attr( $new_user_position ); ?>" /></td>
+	</tr>
 <?php if ( !is_multisite() ) { ?>
 	<tr class="form-field">
 		<th scope="row"><label for="first_name"><?php _e('First Name') ?> </label></th>
@@ -372,10 +382,10 @@ $new_user_ignore_pass = $creating && isset( $_POST['noconfirmation'] ) ? wp_unsl
 		<th scope="row"><label for="last_name"><?php _e('Last Name') ?> </label></th>
 		<td><input name="last_name" type="text" id="last_name" value="<?php echo esc_attr($new_user_lastname); ?>" /></td>
 	</tr>
-	<tr class="form-field">
+	<!--<tr class="form-field">
 		<th scope="row"><label for="url"><?php _e('Website') ?></label></th>
 		<td><input name="url" type="url" id="url" class="code" value="<?php echo esc_attr( $new_user_uri ); ?>" /></td>
-	</tr>
+	</tr>-->
 <?php
 /**
  * Filter the display of the password fields.

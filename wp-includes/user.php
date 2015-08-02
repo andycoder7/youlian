@@ -1973,6 +1973,8 @@ function wp_insert_user( $userdata ) {
 	 *
 	 * @param string $description The user's description.
 	 */
+	$meta['tel'] = empty( $userdata['tel'] ) ? '' : $userdata['tel'];
+	$meta['position'] = empty( $userdata['position'] ) ? '' : $userdata['position'];
 	$meta['description'] = apply_filters( 'pre_user_description', $description );
 
 	$meta['rich_editing'] = empty( $userdata['rich_editing'] ) ? 'true' : $userdata['rich_editing'];
@@ -2168,7 +2170,7 @@ function wp_create_user($username, $password, $email = '') {
  * @return array
  */
 function _get_additional_user_keys( $user ) {
-	$keys = array( 'first_name', 'last_name', 'nickname', 'description', 'rich_editing', 'comment_shortcuts', 'admin_color', 'use_ssl', 'show_admin_bar_front' );
+	$keys = array( 'tel', 'position', 'first_name', 'last_name', 'nickname', 'description', 'rich_editing', 'comment_shortcuts', 'admin_color', 'use_ssl', 'show_admin_bar_front' );
 	return array_merge( $keys, array_keys( wp_get_user_contact_methods( $user ) ) );
 }
 
