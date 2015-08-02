@@ -79,6 +79,7 @@ class Youlian {
 		//add_options_page( $page_title, $menu_title, $capability, $menu_slug, $function);
 		//页名称，菜单名称，访问级别，菜单别名，点击该菜单时的回调函数（用以显示设置页面）
 		add_options_page('Set Config', '参数配置', 'administrator','config', array('youlian', 'display_config_html_page'));
+		add_options_page('Set Logs', '访客日志', 'administrator','logs', array('youlian', 'display_logs_html_page'));
 	}
 
 	//显示配置页面
@@ -87,9 +88,12 @@ class Youlian {
 	   <div>
 		    <h2>参数配置</h2>
 				<form method="post">
-					<?php /* 下面这行代码用来保存表单中内容到数据库 */
-						if ( 'save' == $_REQUEST['action'] )
-							update_option( ci_fontsize, $_REQUEST['ci_fontsize'] );
+					<?php
+						if ( '保存配置' == $_REQUEST['action'] ) {
+							foreach($_POST as $key => $value) {
+								update_option($key, $value);
+							}
+						}
 					?>
 				<p>
 					<label>锭距</label>
@@ -146,10 +150,30 @@ class Youlian {
 					<label style="display:inline-block;width:110px;">发货前付到折扣：</label>
 					<input type="text" name="fahuoqianfudaozhekou" style="width:100px" value=<?php echo get_option('fahuoqianfudaozhekou');?>>折
 				</p>
-                <input type="submit" name="action" value="保存" class="button-primary" />
+                <input type="submit" name="action" value="保存配置" class="button-primary" />
 				</p>
-        </form>
-    </div>
+			</form>
+		</div>
 <?php
-}
+	}
+
+	//显示配置页面
+	public static function display_logs_html_page() {
+		require_once( dirname( __FILE__ ) . '/admin.php' );
+
+		if ( ! current_user_can( 'list_logs' ) )
+			    wp_die( __( 'Cheatin&#8217; uh?' ), 403 );
+
+		$wp_list_table = _get_list_table('WP_Logs_List_Table');
+		$pagenum = $wp_list_table->get_pagenum();
+		$title = __('logs');
+		$parent_file = 'users.php';
+
+		add_screen_option( 'per_page' );
+
+?>
+	   <div>
+		    <h2>访客日志</h2>
+<?php
+	}
 }
