@@ -387,7 +387,7 @@ function get_banner_slide(){
         foreach($previous_posts as $post){
             setup_postdata($post);
             $thumbnail_img = get_post_thumbnail_url($post->ID);
-            $str.="<li><img src='".$thumbnail_img."' alt='".$post->post_title."' /><div class='flex-caption'><h3>".mb_strimwidth($post->post_title,0,40)."</h3> <p>".strip_tags(mb_strimwidth($post->post_content,0,120,'......'))."</p><input type='button' value='查看详情' class='red' onclick=\"location.href='".get_permalink($post->ID)."'\"/></div></li>"; 
+            $str.="<li><img src='".$thumbnail_img."' alt='".$post->post_title."' /><div class='flex-caption'><h3>".mb_strimwidth($post->post_title,0,40)."</h3> <p>".strip_tags(mb_strimwidth($post->post_content,0,120,'......'))."</p><input type='button' value='查看详情' class='red' onclick=\"location.href='".get_permalink($post->ID)."'\"/></div></li>";
         }
     }
     echo $str;
@@ -432,7 +432,7 @@ function get_main_services_post(){
             setup_postdata($post);
             $post_title = mb_strimwidth($post->post_title,0,16);
             $post_content = mb_strimwidth($post->post_content,0,120);
-            $str.="<li class='bt-30'> <img src='".get_bloginfo('template_url')."/static/img/".$i."_A.png' alt='".$post_title."' 
+            $str.="<li class='bt-30'> <img src='".get_bloginfo('template_url')."/static/img/".$i."_A.png' alt='".$post_title."'
                 title='".$post_title."'/><a href='".get_permalink($post->ID)."'><h4 title='阅读更多'>".$post_title."</h4></a><p>".$post_content."</p><a href='".get_permalink($post->ID)."'>— 阅读更多 —</a> </li>";
             $i++;
         }
@@ -642,6 +642,11 @@ function cut_str($src_str,$cut_length){
 //开启后台友情链接
 add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
+function get_avatar_uctheme( $avatar ) {
+	$avatar = preg_replace( "/http:\/\/(www|\d).gravatar.com/","http://gravatar.duoshuo.com",$avatar );
+	return $avatar;
+}
+add_filter( 'get_avatar', 'get_avatar_uctheme' );
 /**
   * DChaser 主题 functions.php 到此结束
   * 如仍有内容，可能感染木马，删除即可

@@ -64,6 +64,11 @@ function edit_user( $user_id = 0 ) {
 
 	if ( isset( $_POST['email'] ))
 		$user->user_email = sanitize_text_field( wp_unslash( $_POST['email'] ) );
+	//增加电话和职位
+	if ( isset( $_POST['tel'] ))
+		$user->tel = wp_unslash( $_POST['tel'] );
+	if ( isset( $_POST['position'] ))
+		$user->position = wp_unslash( $_POST['position'] );
 	if ( isset( $_POST['url'] ) ) {
 		if ( empty ( $_POST['url'] ) || $_POST['url'] == 'http://' ) {
 			$user->user_url = '';
