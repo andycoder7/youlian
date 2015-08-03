@@ -72,3 +72,7 @@ if ( is_multisite() ) {
 	require_once(ABSPATH . 'wp-admin/includes/ms.php');
 	require_once(ABSPATH . 'wp-admin/includes/ms-deprecated.php');
 }
+
+/** WordPress Logs Administration API */
+require_once(ABSPATH . 'wp-admin/includes/logs.php');
+require_once(ABSPATH . 'wp-includes/logs.php');
