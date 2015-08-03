@@ -116,8 +116,10 @@ class WP_Logs_Query {
 	public function prepare_query( $query = array() ) {
 		global $wpdb;
 
-		var_dump($wpdb);
-		exit;
+		// var_dump($wpdb);
+		// var_dump($this->query_vars);
+		// var_dump($query);
+		// exit;
 		if ( empty( $this->query_vars ) || ! empty( $query ) ) {
 			$this->query_limit = null;
 			$this->query_vars = wp_parse_args( $query, array(
@@ -137,7 +139,7 @@ class WP_Logs_Query {
 				'count_total' => true,
 				'fields' => 'all',
 				'who' => ''*/
-				'name' => '',
+				// 'name' => '',
 			) );
 		}
 
@@ -152,10 +154,12 @@ class WP_Logs_Query {
 		 * @param WP_User_Query $this The current WP_User_Query instance,
 		 *                            passed by reference.
 		 */
-		do_action( 'pre_get_users', $this );
+		// do_action( 'pre_get_users', $this );
 
 		$qv =& $this->query_vars;
 
+		var_dump($qv);
+		// exit;
 		if ( is_array( $qv['fields'] ) ) {
 			$qv['fields'] = array_unique( $qv['fields'] );
 
@@ -168,7 +172,8 @@ class WP_Logs_Query {
 		} elseif ( 'all' == $qv['fields'] ) {
 			$this->query_fields = "$wpdb->youlian_logs.*";
 		} else {
-			$this->query_fields = "$wpdb->youlian_logs.ID";
+			echo '1';
+			$this->query_fields = "$wpdb->youlian_logs.*";
 		}
 
 		if ( isset( $qv['count_total'] ) && $qv['count_total'] )
@@ -383,6 +388,7 @@ class WP_Logs_Query {
 		$qv =& $this->query_vars;
 
 		$query = "SELECT $this->query_fields $this->query_from $this->query_where $this->query_orderby $this->query_limit";
+		$query = "select * from wp_youlian_logs";
 
 		if ( is_array( $qv['fields'] ) || 'all' == $qv['fields'] ) {
 			$this->results = $wpdb->get_results( $query );
