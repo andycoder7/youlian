@@ -4,23 +4,24 @@
     <div id="footer">
         <div class="container clearfix">
             <div class="footer-content">
-                <!-- Tags -->
+                 
+                <!-- Tags
                 <div class="one-fourth tags" style="padding-right: 15px;">
                     <h5>云标签</h5>
                     <?php wp_tag_cloud('smallest=12&largest=16&unit=px&number=65&orderby=count&order=RAND');?>
                 </div>
-                <!-- /Tags -->
+                 /Tags -->
 
-                <!-- my_entry_published -->
+                <!-- my_entry_published
                 <div class="one-fourth  link-path">
                     <h5>日志归档</h5>
                     <ul style="list-style-type: disc;margin-left: 25px;">
                     <?php wp_get_archives('type=monthly&limit=12&show_post_count=true'); ?>
                     </ul>
                 </div>
-                <!-- /my_entry_published -->
+                /my_entry_published -->
 
-                <!-- Contacts -->
+                <!-- Contacts 
                 <div class="one-fourth link-path">
                     <h5>友情链接</h5>
                     <p class="friend-links"><a href="<?php echo get_option("Dchaser_links"); ?>">更多友链 »</a></p>
@@ -28,10 +29,12 @@
                     <?php wp_list_bookmarks('orderby=link_id&categorize=0&title_li='); ?>
     	           </ul>
                 </div>
-                <!-- /Contacts -->
+                /Contacts -->
+                 
 
                 <!-- About -->
-                <div class="one-fourth last link-path">
+                <!-- <div class="one-fourth last link-path"> -->
+                <div >
                     <h5>关于我们</h5>
                     <p><?php echo get_option("Dchaser_aboutus"); ?></p>
                 </div>
