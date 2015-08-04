@@ -87,7 +87,7 @@ class WP_Logs_List_Table extends WP_List_Table {
 			'offset' => ( $paged-1 ) * $users_per_page,
 			'role' => $role,
 			'search' => $usersearch,
-			'fields' => 'all_with_meta'
+			'fields' => 'all'
 		);
 
 		if ( '' !== $args['search'] )
@@ -306,8 +306,8 @@ class WP_Logs_List_Table extends WP_List_Table {
 
 		$editable_roles = array_keys( get_editable_roles() );
 
-		foreach ( $this->items as $userid => $user_object ) {
-			if ( count( $user_object->roles ) <= 1 ) {
+		foreach ( $this->items as $key => $value ) {
+			/*if ( count( $user_object->roles ) <= 1 ) {
 				$role = reset( $user_object->roles );
 			} elseif ( $roles = array_intersect( array_values( $user_object->roles ), $editable_roles ) ) {
 				$role = reset( $roles );
@@ -317,8 +317,14 @@ class WP_Logs_List_Table extends WP_List_Table {
 
 			if ( is_multisite() && empty( $user_object->allcaps ) )
 				continue;
-
-			echo "\n\t" . $this->single_row( $user_object, $style = '', $role, isset( $post_counts ) ? $post_counts[ $userid ] : 0 );
+			*/
+			// echo "\n\t" . $this->single_row( $log_object, $style = '', $role, isset( $post_counts ) ? $post_counts[ $userid ] : 0 );
+			echo "\n\t" .
+						'<tr>' .
+							'<td>' .
+								$value->id .
+							'</td>' .
+						'</tr>';
 		}
 	}
 
@@ -338,19 +344,19 @@ class WP_Logs_List_Table extends WP_List_Table {
 	 *                            to zero, as in, a new user has made zero posts.
 	 * @return string Output for a single row.
 	 */
-	public function single_row( $user_object, $style = '', $role = '', $numposts = 0 ) {
+	public function single_row( $log_object, $style = '', $role = '', $numposts = 0 ) {
 		global $wp_roles;
 
-		if ( ! ( $user_object instanceof WP_User ) ) {
-			$user_object = get_userdata( (int) $user_object );
-		}
+		// if ( ! ( $user_object instanceof WP_User ) ) {
+			// $user_object = get_userdata( (int) $user_object );
+		// }
 		$user_object->filter = 'display';
-		$email = $user_object->user_email;
+		$email = $log_object->user_email;
 
-		if ( $this->is_site_users )
-			$url = "site-users.php?id={$this->site_id}&amp;";
-		else
-			$url = 'users.php?';
+		// if ( $this->is_site_users )
+			// $url = "site-users.php?id={$this->site_id}&amp;";
+		// else
+			// $url = 'users.php?';
 
 		$checkbox = '';
 		// Check if the user for this row is editable
