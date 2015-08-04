@@ -1,6 +1,42 @@
-input[type=text],textarea{padding:7px 10px}
-.button,button,input[type=button],input[type=reset],input[type=submit]{float: right; margin-right: 15px; margin-right: 15px;}
+/* comments in youlian */
+#form_text{float:left;margin-left:20px}
+#form_text textarea{padding:7px 10px; width:720px}
+.submit_comment input[type="submit"],input[type="reset"]{margin-right:15px; float:right}
 #form_info ul{overflow:hidden}
 #form_info li{display:block;float:left;margin-left:20px;width:238px}
-#form_text{float:left;margin-left:20px}
-#form_text textarea{width:720px}
+.admin{margin-left:350px}
+
+/* configuration in youlian */
+.configuration_custom_info {border: 1px solid #ccc;}
+.configuration_custom_info label{width:210px; margin-left:10px}
+.configuration_custom_info input[type="text"]{width:210px; margin-top:8px; margin-left:10px; margin-bottom:10px}
+.configuration_plan {border: 1px solid #ccc;}
+.configuration_plan td{vertical-align:middle;height:50px;}
+.configuration_plan label{display:inline-block;width:80px;margin-left:10px}
+.configuration_plan input{width:80px;display:inline-block;margin:5px;padding:5px;margin-left:0px}
+.configuration_plan select{border:1px solid #ccc;width:90px}
+.symbol {width:20px}
+#shumaojichicun {margin-right:5px}
+
+/* calculate_price in youlian */
+.calculate_custom_info {border:1px solid #ccc}
+.calculate_custom_info label{width:210px; margin-left:10px}
+.calculate_custom_info input[type="text"]{width:210px; margin-top:8px; margin-left:10px; margin-bottom:10px}
+
+.calculate_plan {border: 1px solid #ccc;}
+.calculate_plan select{border:1px solid #ccc;display:inline-block}
+.calculate_plan label{display:inline-block}
+.calculate_plan input[type="text"]{display:inline-block;width:70px;padding:5px;margin-bottom:0px}
+.calculate_plan ul{overflow:hidden;display:inline-block}
+.calculate_plan li{display:inline-block;float:left;height:30px;}
+.first_three{margin-left:10px; width:300px;margin-top:5px;}
+.second_three{width:270px;margin-top:5px}
+.last_three{width:175px;margin-top:5px}
+
+.calculate_button {height:50px;padding-top:10px}
+.calculate_button button{float:right;margin-left:10px}
+
+.calculate_result {border:1px solid #ccc}
+.calculate_result label{margin-left:10px}
+.calculate_result input[type="text"]{display:inline-block;width:80px;padding:5px;margin:5px}
+

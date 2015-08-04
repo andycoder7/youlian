@@ -35,26 +35,28 @@
 <label id="fahuoqianfudaotishi"></label>
 <label id="fahuoqianfudaodayushoufutishi"></label>
 <label id="anzhuangtiaoshiwantishi"></label>
-<legend>顾客信息</legend>
-<table class="table" width="100%">
+<!--<legend>顾客信息</legend>-->
+<h3>顾客信息</h3>
+<table class="configuration_custom_info" width="100%">
 	<tr>
 		<td>
-			<label>姓名：</label>
+			<label>您的姓名：</label>
 			<input id="name" type="text" value=<?php if(isset($_COOKIE['name'])) echo $_COOKIE['name'];?>>
 		</td>
 		<td>
-			<label>电话：</label>
+			<label>您的电话：</label>
 			<input id="tel" type="text" value=<?php if(isset($_COOKIE['tel'])) echo $_COOKIE['tel'];?>>
 		</td>
 		<td>
-			<label>邮箱：</label>
+			<label>您的邮箱：</label>
 			<input id="email" type="text" value=<?php if(isset($_COOKIE['email'])) echo $_COOKIE['email'];?>>
 		</td>
 	</tr>
 </table>
 <br />
-<legend>配置方案</legend>
-<table class="table" width="100%">
+<!--<legend>配置方案</legend>-->
+<h3>配置方案</h3>
+<table class="configuration_plan" width="100%">
 	<tr>
 		<td>
 			<label>梳毛机尺寸：</label>
@@ -64,7 +66,7 @@
 				<option value="80">80</option>
 				<option value="90">90</option>
 				<option value="100" selected>100</option>
-			</select>
+			</select>英寸
 		</td>
 		<td></td>
 		<td>
@@ -86,19 +88,19 @@
 	<tr>
 		<td>
 			<label>厂房长度：</label>
-			<input type="text" id="changfangchangdu" style="width:80px">mm
+			<input type="text" id="changfangchangdu">mm
 		</td>
 		<td></td>
 		<td>
 			<label>厂房宽度：</label>
-			<input type="text" id="changfangkuandu" style="width:80px">mm
+			<input type="text" id="changfangkuandu">mm
 		</td>
 		<td></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>
-			<label style="display:inline-block;width:60px">毛轴数：</label>
+			<label>毛轴数：</label>
 			<select id="maozhoushu" onchange="jisuan();">
 				<option value="4">4</option>
 				<option value="8">8</option>
@@ -106,9 +108,9 @@
 				<option value="16">16</option>
 			</select>
 		</td>
-		<td width="40px">X</td>
+		<td class="symbol">X</td>
 		<td>
-			<label>单根毛轴头数：</label>
+			<label>单根头数：</label>
 			<select id="dangenmaozhoutoushu" onchange="jisuan();">
 				<option value="12">12</option>
 				<option value="13">13</option>
@@ -151,20 +153,20 @@
 				<option value="50">50</option>
 			</select>
 		</td>
-		<td width="40px">X</td>
+		<td class="symbol">X</td>
 		<td>
-			<label style="display:inline-block;width:60px">总头数：</label>
-			<input type="text" id="zongtoushu" value=240 style="width:80px" readonly="readonly" onblur="jisuan();">
+			<label>总头数：</label>
+			<input type="text" id="zongtoushu" value=240 readonly="readonly" onblur="jisuan();">
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<label style="display:inline-block;width:60px">总头数：</label>
-			<input type="text" id="zongtoushu_xianshi" value=240 style="width:80px" readonly="readonly" onblur="jisuan();">
+			<label>总头数：</label>
+			<input type="text" id="zongtoushu_xianshi" value=240 readonly="readonly" onblur="jisuan();">
 		</td>
-		<td>X</td>
+		<td class="symbol">X</td>
 		<td>
-			<label style="display:inline-block;width:60px">落数：</label>
+			<label>落数：</label>
 			<select id="luoshu" onchange="jisuan();">
 				<option value="3" selected>3</option>
 				<option value="3.25">3.25</option>
@@ -181,20 +183,20 @@
 				<option value="6">6</option>
 			</select>
 		</td>
-		<td>X</td>
+		<td class="symbol">X</td>
 		<td>
-			<label style="display:inline-block;width:60px">绽数：</label>
-			<input type="text" id="dingshu" value=720 style="width:80px" readonly="readonly" onblur="jisuan();">
+			<label>绽数：</label>
+			<input type="text" id="dingshu" value=720 readonly="readonly" onblur="jisuan();">
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<label style="display:inline-block;width:60px">绽数：</label>
-			<input type="text" id="dingshu_xianshi" value=720 style="width:80px" readonly="readonly" onblur="jisuan();">
+			<label>绽数：</label>
+			<input type="text" id="dingshu_xianshi" value=720 readonly="readonly" onblur="jisuan();">
 		</td>
-		<td>X</td>
+		<td class="symbol">X</td>
 		<td>
-			<label style="display:inline-block;width:60px">绽距：</label>
+			<label>绽距：</label>
 			<select id="dingju" onchange="jisuan();">
 				<option value="50">50P</option>
 				<option value="55">55P</option>
@@ -205,12 +207,12 @@
 		<td>=</td>
 		<td>
 			<label style="color:red">设备长度：</label>
-			<input type="text" id="shebeichangdu" value=45200 style="width:80px" onblur="jisuan();">mm
+			<input type="text" id="shebeichangdu" value=45200 onblur="jisuan();">mm
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<label style="display:inline-block;width:60px">展距：</label>
+			<label>展距：</label>
 			<select id="zhanju" onchange="jisuan();">
 				<option value="4250">3M</option>
 				<option value="4150">3.5M</option>
@@ -223,7 +225,7 @@
 		<td>=</td>
 		<td>
 			<label style="color:red">设备宽度：</label>
-			<input type="text" id="shebeikuandu" value=5250 style="width:80px" readonly="readonly" onblur="jisuan();">mm
+			<input type="text" id="shebeikuandu" value=5250 readonly="readonly" onblur="jisuan();">mm
 		</td>
 	</tr>
 </table>
