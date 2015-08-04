@@ -54,12 +54,27 @@
 <p><?php _e('登陆者','lovnvns'); ?> <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo wp_logout_url(get_permalink()); ?>" title="<?php _e('注销账户','lovnvns'); ?>"><?php _e('退出','lovnvns'); ?> &raquo;</a></p><div class="clear"></div>
 <?php else : ?>
 <div id="form_info">
+    <ul>
+        <li>你的大名（必填）</li>
+        <li>你的邮箱（必填）</li>
+        <li>你的网站（选填）</li>
+    </ul>
+    <ul>
+        <li> <input type="text" name="author" id="author" value="<?php echo esc_attr($comment_author); ?>" tabindex="1" /> </li>
+        <li> <input type="text" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>"  tabindex="2" /> </li>
+        <li> <input type="text" name="url" id="url" value="<?php echo esc_attr($comment_author_url); ?>" tabindex="3" /> </li>
+    </ul>
+
+</div>
+<!--
+<div id="form_info">
     <p>你的大名（必填）<br /><input type="text" name="author" id="author" value="<?php echo esc_attr($comment_author); ?>" tabindex="1" /></p><div class="clear"></div>
 
     <p>你的邮箱（必填）<br /><input type="text" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>"  tabindex="2" /></p><div class="clear"></div>
 
     <p>你的网站（选填）<br /><input type="text" name="url" id="url" value="<?php echo esc_attr($comment_author_url); ?>" tabindex="3" /></p><div class="clear"></div>
 </div>
+-->
 <?php endif; ?>
 <div id="form_text">
 	<p>评论内容（必填）<br /><textarea name="comment" id="comment" tabindex="4" rows="40" cols="43"></textarea></p>
