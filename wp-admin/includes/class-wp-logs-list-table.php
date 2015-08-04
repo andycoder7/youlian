@@ -259,11 +259,11 @@ class WP_Logs_List_Table extends WP_List_Table {
 	public function get_columns() {
 		$c = array(
 			'cb'       => '<input type="checkbox" />',
-			'username' => __( 'Username' ),
-			'name'     => __( 'Name' ),
-			'email'    => __( 'E-mail' ),
-			'role'     => __( 'Role' ),
-			'posts'    => __( 'Posts' )
+			'id' => '编号',
+			'name' => '姓名',
+			'ip'    => 'IP',
+			'city'     => '城市',
+			'create_time'    => '创建时间'
 		);
 
 		if ( $this->is_site_users )
@@ -282,9 +282,10 @@ class WP_Logs_List_Table extends WP_List_Table {
 	 */
 	protected function get_sortable_columns() {
 		$c = array(
-			'username' => 'login',
-			'name'     => 'name',
-			'email'    => 'email',
+			'name' => 'name',
+			'city'     => 'city',
+			'ip'     => 'ip',
+			'create_time'    => 'create_time',
 		);
 
 		if ( $this->is_site_users )
@@ -321,9 +322,12 @@ class WP_Logs_List_Table extends WP_List_Table {
 			// echo "\n\t" . $this->single_row( $log_object, $style = '', $role, isset( $post_counts ) ? $post_counts[ $userid ] : 0 );
 			echo "\n\t" .
 						'<tr>' .
-							'<td>' .
-								$value->id .
-							'</td>' .
+							'<td>' . '<input type="checkbox" value="$value->id">' . '</td>' .
+							'<td>' . $value->id . '</td>' .
+							'<td>' . $value->name . '</td>' .
+							'<td>' . $value->ip . '</td>' .
+							'<td>' . $value->city . '</td>' .
+							'<td>' . $value->create_time . '</td>' .
 						'</tr>';
 		}
 	}
