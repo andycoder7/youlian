@@ -52,7 +52,7 @@
                     <!--<li>Based on <a href="http://dearb.me" target="_blank">BelinChung</a></li>-->
 					<!--<li>Developed by <a href="http://www.szjlxh.com" target="_blank">苏州嘉禄讯汇智能科技有限公司</a></li>-->
                     <li><a href="http://www.miibeian.gov.cn/" target="_blank" title="备案信息"><?php echo get_option("Dchaser_beian"); ?></a></li>
-					<li><a href="<?php bloginfo('siteurl');?>/wp-admin" target="_blank">后台管理</a></li>
+					<li><a class="admin" href="<?php bloginfo('siteurl');?>/wp-admin" target="_blank">后台管理</a></li>
 
                     <li><?php echo get_option("Dchaser_stat"); ?></li>
                 </ul>
