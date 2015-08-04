@@ -29,25 +29,28 @@
 <label id="fahuoqianfudaotishi"></label>
 <label id="fahuoqianfudaodayushoufutishi"></label>
 <label id="anzhuangtiaoshiwantishi"></label>
-<legend>顾客信息</legend>
-<table class="table" width="100%">
+<!--<legend>顾客信息</legend> -->
+<h3>顾客信息</h3>
+<table class="calculate_custom_info" width="100%">
 	<tr>
 		<td>
-			<label>姓名：</label>
+			<label>您的姓名：</label>
 			<input id="name" type="text" value=<?php if(isset($_COOKIE['name'])) echo $_COOKIE['name'];?>>
 		</td>
 		<td>
-			<label>电话：</label>
+			<label>您的电话：</label>
 			<input id="tel" type="text" value=<?php if(isset($_COOKIE['tel'])) echo $_COOKIE['tel'];?>>
 		</td>
 		<td>
-			<label>邮箱：</label>
+			<label>您的邮箱：</label>
 			<input id="email" type="text" value=<?php if(isset($_COOKIE['email'])) echo $_COOKIE['email'];?>>
 		</td>
 	</tr>
 </table>
-<legend>报价方案</legend>
-<table class="table" width="100%">
+<!--<legend>报价方案</legend>-->
+<h3>报价方案</h3>
+<!--
+<table class="calculate_plan" width="100%">
 	<tr>
 		<td colspan="2">
 			<label>机种：</label>
@@ -106,46 +109,101 @@
 		</td>
 	</tr>
 </table>
-<br />
-<button onclick="jisuanjiage();">计算价格</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<button onclick="qingkongchongsuan();">清空重算</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<br />
-<br />
-<table class="table" width="100%">
+-->
+<div class="calculate_plan" width="100%">
+<ul>
+    <li class="first_three">
+        <label style="width:40px">机种：</label>
+		<select id="jizhong" style="width:250px">
+			<option value='YZJ-1型走架细纱机' selected>YZJ-1型走架细纱机</option>
+		</select>
+    </li>
+    <li class="second_three">
+		<label style="margin-left:120px;width:40px">台数：</label>
+		<input type="text" id="taishu" value="1" onblur="validate_taishu();"></td>
+    </li>
+    <li class="last_three">
+        <input type="checkbox" id="shifoubaoliuzhibaojin" style="width:20px">保留质保金5%
+    </li>
+    <li class="first_three">
+		<label style="width:125px">绽数(800以内整数)：</label>
+		<input type="text" id="dingshu" onblur="validate_dingshu();">
+    </li>
+    <li class="second_three">
+		<label style="width:40px">绽距：</label>
+		<select style="width:65px" id="dingju">
+			<option value=<?php echo get_option('dingju_key_1');?>><?php echo get_option('dingju_value_1');?>P</option>
+			<option value=<?php echo get_option('dingju_key_2');?>><?php echo get_option('dingju_value_2');?>P</option>
+			<option value=<?php echo get_option('dingju_key_3');?>><?php echo get_option('dingju_value_3');?>P</option>
+			<option value=<?php echo get_option('dingju_key_4');?>><?php echo get_option('dingju_value_4');?>P</option>
+		</select>
+		<label style="width:40px;margin-left:6px">展距：</label>
+		<select style="width:80px" id="zhanju">
+			<option value=<?php echo get_option('zhanju_key_1');?>><?php echo get_option('zhanju_value_1');?>P</option>
+			<option value=<?php echo get_option('zhanju_key_2');?>><?php echo get_option('zhanju_value_2');?>P</option>
+			<option value=<?php echo get_option('zhanju_key_3');?>><?php echo get_option('zhanju_value_3');?>P</option>
+			<option value=<?php echo get_option('zhanju_key_4');?>><?php echo get_option('zhanju_value_4');?>P</option>
+		</select>
+    </li>
+    <li class="last_three">
+		<label style="width:80px">交货期：</label>
+		<select id="jiaohuoqi" style="width:80px">
+			<option value="0">协商</option>
+		</select>
+    </li>
+    <li class="first_three">
+		<label style="width:125px">首付(30-100整数)：</label>
+		<input type="text" id="shoufu" onblur="validate_shoufu();">%
+    </li>
+    <li class="second_three">
+		<label style="width:160px">发货前付到(65-100整数)：</label>
+		<input type="text" id="fahuoqianfudao" onblur="calculate_percentage('fahuoqianfudao');">%
+    </li>
+    <li class="last_three">
+		<label style="width:80px">安装调试完：</label>
+		<input type="text" id="anzhuangtiaoshiwan" onblur="calculate_percentage('anzhuangtiaoshiwan');">%
+    </li>
+</ul>
+</div>
+<div class="calculate_button">
+    <button class="red" onclick="jisuanjiage();">计算价格</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    <button class="red" onclick="qingkongchongsuan();">清空重算</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</div>
+<table class="calculate_result" width="100%">
 	<tr>
 		<td>
-			<label style="display:inline-block;width:114px">优惠前总价：</label>
-			<input type="text" id="youhuiqianzongjia" style="width:80px">元
+			<label style="display:inline-block;width:115px;">优惠前总价：</label>
+			<input type="text" id="youhuiqianzongjia">元
 		</td>
-		<td colspan="2">
-			<label style="display:inline-block;width:145px">首付款：</label>
-			<input type="text" id="shoufukuan" style="width:80px">元
+		<td >
+			<label style="display:inline-block;width:100px">首付款：</label>
+			<input type="text" id="shoufukuan">元
 		</td>
 		<td>
 			<label>发货前付款：</label>
-			<input type="text" id="fahuoqianfukuan" style="width:80px">元
+			<input type="text" id="fahuoqianfukuan">元
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<label style="display:inline-block;width:114px">安装调试完付款：</label>
-			<input type="text" id="anzhuangtiaoshiwanfukuan" style="width:80px">元
+			<label style="display:inline-block;width:115px">安装调试完付款：</label>
+			<input type="text" id="anzhuangtiaoshiwanfukuan">元
 		</td>
-		<td colspan="2">
-			<label style="display:inline-block;width:145px">质保金：</label>
-			<input type="text" id="zhibaojin" style="width:80px">元
+		<td >
+			<label style="display:inline-block;width:100px">质保金：</label>
+			<input type="text" id="zhibaojin">元
 		</td>
 		<td>
 			<label>优惠后总价：</label>
-			<input type="text" id="youhuihouzongjia" style="width:80px">元
+			<input type="text" id="youhuihouzongjia">元
 		</td>
 	</tr>
 </table>
-<br />
-<button onclick="baoliufangan();">保留方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<br />
-<br />
-<legend>方案对比</legend>
+<div class="calculate_button">
+    <button class="red" onclick="baoliufangan();">保留方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</div>
+<!--<legend>方案对比</legend>-->
+<h3>方案对比</h3>
 <div class="results" align="left">
 	<table class="table" id="results" width="100%">
 		<tr>
@@ -166,12 +224,11 @@
 	</table>
 <!--</form>-->
 </div>
-<br />
-<button onclick="jisuanzonge();">计算总额</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<button onclick="jisuanzonge();">删除勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<button onclick="qingkongfangan();">编辑勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<br />
-<br />
+<div class="calculate_button">
+<button class="red" onclick="jisuanzonge();">计算总额</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<button class="red" onclick="jisuanzonge();">删除勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<button class="red" onclick="qingkongfangan();">编辑勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+</div>
 <label><b>优惠前总金额：</b></label>
 <label id = "youhuiqianzongjine" style="display:inline-block;width:160px"></label>
 <label><b>优惠后总金额：</b></label>

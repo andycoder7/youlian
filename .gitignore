@@ -1,2 +1,4 @@
 tags
 *.swp
+wp-config.php
+.htaccess
