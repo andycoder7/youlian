@@ -152,7 +152,6 @@ class WP_Logs_Query {
 
 		$qv =& $this->query_vars;
 
-		var_dump($qv);
 		if ( is_array( $qv['fields'] ) ) {
 			$qv['fields'] = array_unique( $qv['fields'] );
 
@@ -406,7 +405,7 @@ class WP_Logs_Query {
 		 * @param string $sql The SELECT FOUND_ROWS() query for the current WP_User_Query.
 		 */
 		if ( isset( $qv['count_total'] ) && $qv['count_total'] )
-			$this->total_logs = $wpdb->get_var( apply_filters( 'found_users_query', 'SELECT FOUND_ROWS()' ) );
+			$this->total_users = $wpdb->get_var( apply_filters( 'found_users_query', 'SELECT FOUND_ROWS()' ) );
 
 		/*
 		if ( !$this->results )
