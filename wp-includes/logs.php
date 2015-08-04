@@ -116,14 +116,9 @@ class WP_Logs_Query {
 	public function prepare_query( $query = array() ) {
 		global $wpdb;
 
-		// var_dump($wpdb);
-		// var_dump($this->query_vars);
-		// var_dump($query);
-		// exit;
 		if ( empty( $this->query_vars ) || ! empty( $query ) ) {
 			$this->query_limit = null;
 			$this->query_vars = wp_parse_args( $query, array(
-				/*'blog_id' => $GLOBALS['blog_id'],
 				'role' => '',
 				'meta_key' => '',
 				'meta_value' => '',
@@ -132,14 +127,13 @@ class WP_Logs_Query {
 				'exclude' => array(),
 				'search' => '',
 				'search_columns' => array(),
-				'orderby' => 'login',
-				'order' => 'ASC',
+				'orderby' => array('id' => 'DESC'),
+				'order' => 'DESC',
 				'offset' => '',
 				'number' => '',
 				'count_total' => true,
 				'fields' => 'all',
-				'who' => ''*/
-				// 'name' => '',
+				'who' => ''
 			) );
 		}
 
@@ -154,12 +148,11 @@ class WP_Logs_Query {
 		 * @param WP_User_Query $this The current WP_User_Query instance,
 		 *                            passed by reference.
 		 */
-		// do_action( 'pre_get_users', $this );
+		do_action( 'pre_get_users', $this );
 
 		$qv =& $this->query_vars;
 
 		var_dump($qv);
-		// exit;
 		if ( is_array( $qv['fields'] ) ) {
 			$qv['fields'] = array_unique( $qv['fields'] );
 
@@ -172,8 +165,7 @@ class WP_Logs_Query {
 		} elseif ( 'all' == $qv['fields'] ) {
 			$this->query_fields = "$wpdb->youlian_logs.*";
 		} else {
-			echo '1';
-			$this->query_fields = "$wpdb->youlian_logs.*";
+			$this->query_fields = "$wpdb->youlian_logs.id";
 		}
 
 		if ( isset( $qv['count_total'] ) && $qv['count_total'] )
@@ -189,6 +181,7 @@ class WP_Logs_Query {
 			$include = false;
 		}
 
+		/*
 		$blog_id = 0;
 		if ( isset( $qv['blog_id'] ) ) {
 			$blog_id = absint( $qv['blog_id'] );
@@ -242,13 +235,14 @@ class WP_Logs_Query {
 			}
 		}
 
+		 */
 		// sorting
 		$qv['order'] = isset( $qv['order'] ) ? strtoupper( $qv['order'] ) : '';
 		$order = $this->parse_order( $qv['order'] );
 
 		if ( empty( $qv['orderby'] ) ) {
 			// Default order is by 'user_login'.
-			$ordersby = array( 'user_login' => $order );
+			$ordersby = array( 'id' => $order );
 		} else if ( is_array( $qv['orderby'] ) ) {
 			$ordersby = $qv['orderby'];
 		} else {
@@ -272,18 +266,19 @@ class WP_Logs_Query {
 				$_order = $_value;
 			}
 
-			$parsed = $this->parse_orderby( $_orderby );
+			// $parsed = $this->parse_orderby( $_orderby );
 
-			if ( ! $parsed ) {
-				continue;
-			}
+			// if ( ! $parsed ) {
+				// continue;
+			// }
 
-			$orderby_array[] = $parsed . ' ' . $this->parse_order( $_order );
+			$orderby_array[] = $_orderby . ' ' . $this->parse_order( $_order );
+			// $orderby_array[] =  $this->parse_order( $_order );
 		}
 
 		// If no valid clauses were found, order by user_login.
 		if ( empty( $orderby_array ) ) {
-			$orderby_array[] = "user_login $order";
+			$orderby_array[] = "id $order";
 		}
 
 		$this->query_orderby = 'ORDER BY ' . implode( ', ', $orderby_array );
@@ -316,7 +311,7 @@ class WP_Logs_Query {
 
 			$search_columns = array();
 			if ( $qv['search_columns'] )
-				$search_columns = array_intersect( $qv['search_columns'], array( 'ID', 'user_login', 'user_email', 'user_url', 'user_nicename' ) );
+				$search_columns = array_intersect( $qv['search_columns'], array( 'name', 'ip', 'city', 'create_time' ) );
 			if ( ! $search_columns ) {
 				if ( false !== strpos( $search, '@') )
 					$search_columns = array('user_email');
@@ -345,6 +340,7 @@ class WP_Logs_Query {
 			$this->query_where .= $this->get_search_sql( $search, $search_columns, $wild );
 		}
 
+		/*
 		if ( ! empty( $include ) ) {
 			// Sanitized earlier.
 			$ids = implode( ',', $include );
@@ -353,12 +349,13 @@ class WP_Logs_Query {
 			$ids = implode( ',', wp_parse_id_list( $qv['exclude'] ) );
 			$this->query_where .= " AND $wpdb->users.ID NOT IN ($ids)";
 		}
-
+		 */
 		// Date queries are allowed for the user_registered field.
+		/*
 		if ( ! empty( $qv['date_query'] ) && is_array( $qv['date_query'] ) ) {
 			$date_query = new WP_Date_Query( $qv['date_query'], 'user_registered' );
 			$this->query_where .= $date_query->get_sql();
-		}
+		}*/
 
 		/**
 		 * Fires after the WP_User_Query has been parsed, and before
@@ -387,14 +384,17 @@ class WP_Logs_Query {
 
 		$qv =& $this->query_vars;
 
+		// var_dump($qv);
 		$query = "SELECT $this->query_fields $this->query_from $this->query_where $this->query_orderby $this->query_limit";
-		$query = "select * from wp_youlian_logs";
 
+		echo $query;
 		if ( is_array( $qv['fields'] ) || 'all' == $qv['fields'] ) {
 			$this->results = $wpdb->get_results( $query );
 		} else {
 			$this->results = $wpdb->get_col( $query );
 		}
+		// var_dump($this->results);
+		// exit;
 
 		/**
 		 * Filter SELECT FOUND_ROWS() query for the current WP_User_Query instance.
@@ -406,8 +406,9 @@ class WP_Logs_Query {
 		 * @param string $sql The SELECT FOUND_ROWS() query for the current WP_User_Query.
 		 */
 		if ( isset( $qv['count_total'] ) && $qv['count_total'] )
-			$this->total_users = $wpdb->get_var( apply_filters( 'found_users_query', 'SELECT FOUND_ROWS()' ) );
+			$this->total_logs = $wpdb->get_var( apply_filters( 'found_users_query', 'SELECT FOUND_ROWS()' ) );
 
+		/*
 		if ( !$this->results )
 			return;
 
@@ -423,7 +424,7 @@ class WP_Logs_Query {
 			foreach ( $this->results as $key => $user ) {
 				$this->results[ $key ] = new WP_User( $user, '', $qv['blog_id'] );
 			}
-		}
+		}*/
 	}
 
 	/**
@@ -524,7 +525,7 @@ class WP_Logs_Query {
 	protected function parse_orderby( $orderby ) {
 		global $wpdb;
 
-		$meta_query_clauses = $this->meta_query->get_clauses();
+		// $meta_query_clauses = $this->meta_query->get_clauses();
 
 		$_orderby = '';
 		if ( in_array( $orderby, array( 'login', 'nicename', 'email', 'url', 'registered' ) ) ) {
