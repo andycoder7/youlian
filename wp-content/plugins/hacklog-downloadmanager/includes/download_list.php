@@ -153,7 +153,8 @@ switch($file_sortorder) {
 <p><?php printf(__('Displaying <strong>%s</strong> To <strong>%s</strong> Of <strong>%s</strong> Files', hacklogdm::textdomain ), number_format_i18n($display_on_page), number_format_i18n($max_on_page), number_format_i18n($get_total_files)); ?> / <?php printf(__('Sorted By <strong>%s</strong> In <strong>%s</strong> Order', hacklogdm::textdomain ), $file_sortby_text, $file_sortorder_text); ?></p>
 <?php if( !$ihacklog_tab ):?>
 <p>
-<span style="text-align:center;padding:0 400px;"> <?php _e('File id:', hacklogdm::textdomain ); ?>
+<!--<span style="text-align:center;padding:0 400px;"> <?php _e('File id:', hacklogdm::textdomain ); ?>-->
+<span style="text-align:center;"> <?php _e('File id:', hacklogdm::textdomain ); ?>
 <input type="text" name="edit_id" id="edit_id" /> <input type="button"
 	value="<?php _e('Edit it!', hacklogdm::textdomain ); ?>"
 	class="button"
