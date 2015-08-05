@@ -9,6 +9,11 @@ checkout dev分支，测试无误后合并到master
 
 数据库导出文件为doc/youlian.sql，可自行导入
 
+### 配置文件夹权限
+
+    # 该文件夹用于存放下载的文件, 如果没有请手动创建
+    sudo chmod 777 wp-content/uploads/files
+
 ### 配置伪静态
 
 	sudo a2enmod rewrite
