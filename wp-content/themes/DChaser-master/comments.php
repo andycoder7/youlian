@@ -38,7 +38,15 @@
 
 <?php if ( comments_open() ) : ?>
 <div id="respond">
-<h3><?php comment_form_title( __('发表评论','lovnvns'), __('回复 %s 的评论','lovnvns') );cancel_comment_reply_link(__('  取消','lovnvns')); ?></h3>
+<!--<h3><?php comment_form_title( __('发表评论','lovnvns'), __('回复 %s 的评论','lovnvns') );cancel_comment_reply_link(__('  取消','lovnvns')); ?></h3>-->
+<h3><?php 
+        if (preg_match('/message/', $_SERVER['REQUEST_URI'])) {
+            comment_form_title( __('撰写留言','lovnvns'), __('回复 %s 的留言','lovnvns') );
+        } else {
+            comment_form_title( __('发表评论','lovnvns'), __('回复 %s 的评论','lovnvns') );
+        }
+    cancel_comment_reply_link(__('  取消','lovnvns')); 
+?></h3>
 <?php if(get_option('lovnvns_comment_ad')!="")
     	echo '<div id="form_ad">'.get_option('lovnvns_comment_ad').'</div>';
 ?>
@@ -77,7 +85,12 @@
 -->
 <?php endif; ?>
 <div id="form_text">
+	<!--<p>评论内容（必填）<br /><textarea name="comment" id="comment" tabindex="4" rows="40" cols="43"></textarea></p>-->
+<?php if (preg_match('/message/', $_SERVER['REQUEST_URI'])) : ?>
+	<p>留言内容（必填）<br /><textarea name="comment" id="comment" tabindex="4" rows="40" cols="43"></textarea></p>
+<?php else : ?>
 	<p>评论内容（必填）<br /><textarea name="comment" id="comment" tabindex="4" rows="40" cols="43"></textarea></p>
+<?php endif ?>
 </div>
 <div class="clear"></div>
 <!-- <p id="bq"><?php wp_smilies();?></p>-->
