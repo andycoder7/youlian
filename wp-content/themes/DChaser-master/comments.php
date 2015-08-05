@@ -94,7 +94,11 @@
 </div>
 <div class="clear"></div>
 <!-- <p id="bq"><?php wp_smilies();?></p>-->
-<p class="submit_comment"><input type="submit" name="submit" value="提交评论" class="red" tabindex="5" />
+<?php if (preg_match('/message/', $_SERVER['REQUEST_URI'])) : ?>
+    <p class="submit_comment"><input type="submit" name="submit" value="提交留言" class="red" tabindex="5" />
+<?php else : ?>
+    <p class="submit_comment"><input type="submit" name="submit" value="提交评论" class="red" tabindex="5" />
+<?php endif ?>
 	<input class="red" name="reset" type="reset" id="reset" tabindex="6" value="<?php esc_attr_e( '重写' ); ?>" />
 <?php comment_id_fields(); ?>
 </p>
