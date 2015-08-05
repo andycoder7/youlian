@@ -28,8 +28,8 @@
 <?php else : // or, if we don't have comments:
 	if ( ! comments_open() ) :
 ?>
-	<p class="nocomments"><?php _e( '评论已关闭！', 'lovnvns' ); ?></p>
-    <input type="hidden" id="comment_parent" name="comment_parent" value="" />
+<!--	<p class="nocomments"><?php _e( '评论已关闭！', 'lovnvns' ); ?></p>
+    <input type="hidden" id="comment_parent" name="comment_parent" value="" />-->
 <?php endif; // end ! comments_open() ?>
 
 <?php endif; // end have_comments() ?>

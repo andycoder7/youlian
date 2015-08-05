@@ -1299,7 +1299,7 @@ function comments_popup_link( $zero = false, $one = false, $more = false, $css_c
 	}
 
 	if ( 0 == $number && !comments_open() && !pings_open() ) {
-		echo '<span' . ((!empty($css_class)) ? ' class="' . esc_attr( $css_class ) . '"' : '') . '>' . $none . '</span>';
+		//echo '<span' . ((!empty($css_class)) ? ' class="' . esc_attr( $css_class ) . '"' : '') . '>' . $none . '</span>';
 		return;
 	}
 
