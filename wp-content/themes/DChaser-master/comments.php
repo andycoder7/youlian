@@ -9,9 +9,11 @@
 
 
 <?php if ( have_comments() ) : ?>
-			<h3 id="comments-title"><?php
+			<h3 id="comments-title"><?php if (preg_match('/message/', $_SERVER['REQUEST_URI'])) {
 			printf( _n( '目前共有1条留言', '目前共有%1$s条留言', get_comments_number(), 'lovnvns' ),
-			number_format_i18n( get_comments_number() ), get_the_title() );
+                number_format_i18n( get_comments_number() ), get_the_title() ); } else {
+			printf( _n( '目前共有1条评论', '目前共有%1$s条评论', get_comments_number(), 'lovnvns' ),
+                number_format_i18n( get_comments_number() ), get_the_title() ); } 
 			?></h3>
 
 			<ul class="commentlist">
