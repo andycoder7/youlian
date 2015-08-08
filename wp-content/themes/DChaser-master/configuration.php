@@ -100,7 +100,9 @@
             <input type="text" id="changfangkuandu" onchange="check();">米
         </td>
         <td></td>
-        <td></td>
+        <td>
+            <input type="checkbox" id="shifoubaoliuzhibaojin" style="margin-left:8px; width:20px">厂房在楼上
+        </td>
     </tr>
     <tr>
         <td>
@@ -262,6 +264,7 @@
             document.getElementById('dingshu_label').style.color = '';
         }
 
+        // 如果厂房长宽不为数字则显示为红色
         if(isNaN(document.getElementById('changfangchangdu').value * 1)) {
             document.getElementById('changfangchangdu_label').style.color = 'red';
             document.getElementById('shebeichangdu_label').style.color = 'red';

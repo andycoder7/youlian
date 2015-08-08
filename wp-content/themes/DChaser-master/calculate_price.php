@@ -8,14 +8,14 @@
 <!-- Main Container -->
 <div id="body-wrapper">
  <!-- Content -->
-    <div id="content" class="clearfix">
-        <!-- Main Content -->
-        <div class="main">
-            <div class="divleft">
-                <div class="single_list">
-                    <span class="comment-count"></span><h2></h2>
-                    <div class="hr-line" style="margin-bottom: 8px;"></div>
-                    <div class="post-entry">
+	<div id="content" class="clearfix">
+		<!-- Main Content -->
+		<div class="main">
+			<div class="divleft">
+				<div class="single_list">
+					<span class="comment-count"></span><h2></h2>
+					<div class="hr-line" style="margin-bottom: 8px;"></div>
+					<div class="post-entry">
 <style>
 	.table
 	{
@@ -34,15 +34,15 @@
 <table class="calculate_custom_info" width="100%">
 	<tr>
 		<td>
-			<label>您的姓名：</label>
+			<label>您的姓名 ( 必填 )</label>
 			<input id="name" type="text" value=<?php if(isset($_COOKIE['name'])) echo $_COOKIE['name'];?>>
 		</td>
 		<td>
-			<label>您的电话：</label>
+			<label>您的电话 ( 必填 )</label>
 			<input id="tel" type="text" value=<?php if(isset($_COOKIE['tel'])) echo $_COOKIE['tel'];?>>
 		</td>
 		<td>
-			<label>您的邮箱：</label>
+			<label>您的邮箱 ( 选填 )</label>
 			<input id="email" type="text" value=<?php if(isset($_COOKIE['email'])) echo $_COOKIE['email'];?>>
 		</td>
 	</tr>
@@ -112,24 +112,24 @@
 -->
 <div class="calculate_plan" width="100%">
 <ul>
-    <li class="first_three">
-        <label style="width:40px">机种：</label>
+	<li class="first_three">
+		<label style="width:40px">机种：</label>
 		<select id="jizhong" style="width:250px">
 			<option value='YZJ-1型走架细纱机' selected>YZJ-1型走架细纱机</option>
 		</select>
-    </li>
-    <li class="second_three">
+	</li>
+	<li class="second_three">
 		<label style="margin-left:120px;width:40px">台数：</label>
 		<input type="text" id="taishu" value="1" onblur="validate_taishu();"></td>
-    </li>
-    <li class="last_three">
-        <input type="checkbox" id="shifoubaoliuzhibaojin" style="width:20px">保留质保金5%
-    </li>
-    <li class="first_three">
+	</li>
+	<li class="last_three">
+		<input type="checkbox" id="shifoubaoliuzhibaojin" style="width:20px">保留质保金5%
+	</li>
+	<li class="first_three">
 		<label style="width:125px">绽数(800以内整数)：</label>
 		<input type="text" id="dingshu" onblur="validate_dingshu();">
-    </li>
-    <li class="second_three">
+	</li>
+	<li class="second_three">
 		<label style="width:40px">绽距：</label>
 		<select style="width:65px" id="dingju">
 			<option value=<?php echo get_option('dingju_key_1');?>><?php echo get_option('dingju_value_1');?>P</option>
@@ -144,30 +144,30 @@
 			<option value=<?php echo get_option('zhanju_key_3');?>><?php echo get_option('zhanju_value_3');?>P</option>
 			<option value=<?php echo get_option('zhanju_key_4');?>><?php echo get_option('zhanju_value_4');?>P</option>
 		</select>
-    </li>
-    <li class="last_three">
+	</li>
+	<li class="last_three">
 		<label style="width:80px">交货期：</label>
 		<select id="jiaohuoqi" style="width:80px">
 			<option value="0">协商</option>
 		</select>
-    </li>
-    <li class="first_three">
+	</li>
+	<li class="first_three">
 		<label style="width:125px">首付(30-100整数)：</label>
 		<input type="text" id="shoufu" onblur="validate_shoufu();">%
-    </li>
-    <li class="second_three">
+	</li>
+	<li class="second_three">
 		<label style="width:160px">发货前付到(65-100整数)：</label>
 		<input type="text" id="fahuoqianfudao" onblur="calculate_percentage('fahuoqianfudao');">%
-    </li>
-    <li class="last_three">
+	</li>
+	<li class="last_three">
 		<label style="width:80px">安装调试完：</label>
 		<input type="text" id="anzhuangtiaoshiwan" onblur="calculate_percentage('anzhuangtiaoshiwan');">%
-    </li>
+	</li>
 </ul>
 </div>
 <div class="calculate_button">
-    <button class="red" onclick="jisuanjiage();">计算价格</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-    <button class="red" onclick="qingkongchongsuan();">清空重算</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	<button class="red" onclick="jisuanjiage();">计算价格</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	<button class="red" onclick="qingkongchongsuan();">清空重算</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 </div>
 <table class="calculate_result" width="100%">
 	<tr>
@@ -180,8 +180,8 @@
 			<input type="text" id="shoufukuan">元
 		</td>
 		<td>
-			<label>发货前付款：</label>
-			<input type="text" id="fahuoqianfukuan">元
+			<label>发货前再付：</label>
+			<input type="text" id="fahuoqianzaifu">元
 		</td>
 	</tr>
 	<tr>
@@ -200,7 +200,7 @@
 	</tr>
 </table>
 <div class="calculate_button">
-    <button class="red" onclick="baoliufangan();">保留方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+	<button class="red" onclick="baoliufangan();">保留方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 </div>
 <!--<legend>方案对比</legend>-->
 <h3>方案对比</h3>
@@ -213,7 +213,7 @@
 			<!--<th>首付%</th>-->
 			<th>首付款</th>
 			<!--<th>发货前付到%</th>-->
-			<th>发货前付款</th>
+			<th>发货前再付</th>
 			<!--<th>安装调试完%</th>-->
 			<th>安装调试完付款</th>
 			<th>质保金</th>
@@ -315,12 +315,12 @@
 		}
 
 		var shoufukuan = youhuihouzongjia * shoufu * 0.01;
-		var fahuoqianfukuan = youhuihouzongjia * fahuoqianfudao * 0.01;
+		var fahuoqianzaifu = youhuihouzongjia * fahuoqianfudao * 0.01 - shoufukuan;
 		var anzhuangtiaoshiwanfukuan = youhuihouzongjia * anzhuangtiaoshiwan * 0.01;
 
 		document.getElementById("youhuiqianzongjia").value = Math.round(youhuiqianzongjia*100)/100;
 		document.getElementById("shoufukuan").value = Math.round(shoufukuan*100)/100;
-		document.getElementById("fahuoqianfukuan").value = Math.round(fahuoqianfukuan*100)/100;
+		document.getElementById("fahuoqianzaifu").value = Math.round(fahuoqianzaifu*100)/100;
 		document.getElementById("anzhuangtiaoshiwanfukuan").value = Math.round(anzhuangtiaoshiwanfukuan*100)/100;
 		document.getElementById("zhibaojin").value = Math.round(zhibaojin*100)/100;
 		document.getElementById("youhuihouzongjia").value = Math.round(youhuihouzongjia*100)/100;
@@ -332,14 +332,14 @@
 		document.getElementById("taishu").value = 1;
 		document.getElementById('shifoubaoliuzhibaojin').checked = false;
 		document.getElementById("dingshu").value = '';
-		document.getElementById("dingju").value = 415;
-		document.getElementById("zhanju").value = 0.98;
+		document.getElementById("dingju").value = <?php echo get_option('dingju_key_1');?>;//415;
+        document.getElementById("zhanju").value = <?php echo get_option('zhanju_key_1');?>;//0.98;
 		document.getElementById('shoufu').value = '';
 		document.getElementById('fahuoqianfudao').value = '';
 		document.getElementById('anzhuangtiaoshiwan').value = '';
 		document.getElementById('youhuiqianzongjia').value = '';
 		document.getElementById('shoufukuan').value = '';
-		document.getElementById('fahuoqianfukuan').value = '';
+		document.getElementById('fahuoqianzaifu').value = '';
 		document.getElementById('anzhuangtiaoshiwanfukuan').value = '';
 		document.getElementById('zhibaojin').value = '';
 		document.getElementById('youhuihouzongjia').value = '';
@@ -387,7 +387,7 @@
 		var rows = results.rows.length;
 
 		var shoufukuan = document.getElementById("shoufukuan").value;
-		var fahuoqianfukuan = document.getElementById("fahuoqianfukuan").value;
+		var fahuoqianzaifu = document.getElementById("fahuoqianzaifu").value;
 		var anzhuangtiaoshiwanfukuan = document.getElementById("anzhuangtiaoshiwanfukuan").value;
 		var zhibaojin = document.getElementById("zhibaojin").value;
 		var youhuiqianzongjia = document.getElementById("youhuiqianzongjia").value;
@@ -397,7 +397,7 @@
 		details[1] = jizhong;
 		details[2] = taishu;
 		details[3] = shoufukuan;
-		details[4] = fahuoqianfukuan;
+		details[4] = fahuoqianzaifu;
 		details[5] = anzhuangtiaoshiwanfukuan;
 		details[6] = zhibaojin;
 		details[7] = youhuiqianzongjia;
@@ -447,7 +447,7 @@
 
 		$.ajax({
 			url : "<?php echo get_option('siteurl'); ?>/wp-youlian-config.php",
-            type : "POST",
+			type : "POST",
 			data : {name : name,
 					tel : tel,
 					email : email,
@@ -461,28 +461,28 @@
 					anzhuangtiaoshiwan : anzhuangtiaoshiwan,
 					youhuiqianzongjia : Math.round(youhuiqianzongjia*100)/100,
 					shoufukuan : shoufukuan,
-					fahuoqianfukuan : fahuoqianfukuan,
+					fahuoqianzaifu : fahuoqianzaifu,
 					anzhuangtiaoshiwanfukuan : anzhuangtiaoshiwanfukuan,
 					zhibaojin : zhibaojin,
 					youhuihouzongjia : Math.round(youhuihouzongjia*100)/100,
 					youhui : Math.round((youhuiqianzongjia - youhuihouzongjia)*100)/100
 					},
-            datatype : "text",
+			datatype : "text",
 
-            beforeSend : function() {
-                console.log("beforeSend");
-            },
-            success : function(data) {
+			beforeSend : function() {
+				console.log("beforeSend");
+			},
+			success : function(data) {
 				console.log(data);
-                console.log("success");
-            },
-            error : function() {
-                console.log("error");
-            },
-            complete : function() {
-                console.log("complete");
-            },
-        });
+				console.log("success");
+			},
+			error : function() {
+				console.log("error");
+			},
+			complete : function() {
+				console.log("complete");
+			},
+		});
 	}
 
 	//清空方案
@@ -629,12 +629,12 @@
 
 	}
 </script>
-                    </div>
-                </div>
-            </div>
-         <!-- /Post -->
-        </div>
-        <!-- /Main Content -->
+					</div>
+				</div>
+			</div>
+		 <!-- /Post -->
+		</div>
+		<!-- /Main Content -->
 <?php get_sidebar(); ?></div>
 
 <?php get_footer(); ?>
