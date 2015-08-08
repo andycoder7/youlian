@@ -215,19 +215,26 @@
 			<!--<th>发货前付到%</th>-->
 			<th>发货前再付</th>
 			<!--<th>安装调试完%</th>-->
-			<th>安装调试完付款</th>
+			<th>安装调试完</th>
 			<th>质保金</th>
 			<th>优惠前总价</th>
 			<th>优惠后总价</th>
 			<th>优惠</th>
+            <th><input type="hidden" id="hidden_dingshu"></input><th>
+            <th><input type="hidden" id="hidden_dingju"></input><th>
+            <th><input type="hidden" id="hidden_zhanju"></input><th>
+            <th><input type="hidden" id="hidden_jiaohuoqi"></input><th>
+            <th><input type="hidden" id="hidden_shoufu"></input><th>
+            <th><input type="hidden" id="hidden_fahuoqianfudao"></input><th>
+            <th><input type="hidden" id="hidden_anzhuangtiaoshiwan"></input><th>
 		</tr>
 	</table>
 <!--</form>-->
 </div>
 <div class="calculate_button">
-<button class="red" onclick="jisuanzonge();">计算总额</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<button class="red" onclick="jisuanzonge();">删除勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<button class="red" onclick="qingkongfangan();">编辑勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<button class="red" onclick="jisuanzonge();">计算勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<button class="red" onclick="shanchugouxuanfangan();">删除勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<button class="red" onclick="bianjigouxuanfangan();">编辑勾选方案</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 </div>
 <label><b>优惠前总金额：</b></label>
 <label id = "youhuiqianzongjine" style="display:inline-block;width:160px"></label>
@@ -383,13 +390,17 @@
 			alert("还未计算价格");
 			return false;
 		}
+
+        jisuanjiage();
+
 		var results = document.getElementById("results");
 		var rows = results.rows.length;
 
 		var shoufukuan = document.getElementById("shoufukuan").value;
 		var fahuoqianzaifu = document.getElementById("fahuoqianzaifu").value;
 		var anzhuangtiaoshiwanfukuan = document.getElementById("anzhuangtiaoshiwanfukuan").value;
-		var zhibaojin = document.getElementById("zhibaojin").value;
+		var zhibaojin = document.getElementById("zhibaojin").checked;
+		var shifoubaoliuzhibaojin = document.getElementById("shifoubaoliuzhibaojin").checked;
 		var youhuiqianzongjia = document.getElementById("youhuiqianzongjia").value;
 		var youhuihouzongjia = document.getElementById("youhuihouzongjia").value;
 
@@ -399,9 +410,19 @@
 		details[3] = shoufukuan;
 		details[4] = fahuoqianzaifu;
 		details[5] = anzhuangtiaoshiwanfukuan;
-		details[6] = zhibaojin;
+		details[6] = b2s(shifoubaoliuzhibaojin);
 		details[7] = youhuiqianzongjia;
 		details[8] = youhuihouzongjia;
+
+        // 隐藏的部分
+        details[10] = document.getElementById("dingshu").value;
+        details[11] = document.getElementById("dingju").value; 
+        details[12] = document.getElementById("zhanju").value;
+        details[13] = document.getElementById("jiaohuoqi").value;
+        details[14] = document.getElementById("shoufu").value;
+        details[15] = document.getElementById("fahuoqianfudao").value;
+        details[16] = document.getElementById("anzhuangtiaoshiwan").value;
+        details[17] = zhibaojin;
 
 		if(rows > 1)
 		{
@@ -429,7 +450,8 @@
 		{
 			newTd[i] = newTr.insertCell();
 		}
-		newTd[0].innerHTML = rows;
+		//newTd[0].innerHTML = rows;
+        newTd[0].innerHTML = '<input type="checkbox" style="width:20px">';
 		newTd[1].innerHTML = details[1];
 		newTd[2].innerHTML = details[2]
 		newTd[3].innerHTML = details[3];
@@ -440,6 +462,16 @@
 		newTd[8].innerHTML = Math.round(details[8]*100)/100;
 		var youhui = details[7] - details[8];
 		newTd[9].innerHTML = Math.round(youhui*100)/100;
+
+        //隐藏的部分
+        newTd[10].innerHTML = '<input type="hidden" value="' + details[10] + '">';
+        newTd[11].innerHTML = '<input type="hidden" value="' + details[11] + '">';
+        newTd[12].innerHTML = '<input type="hidden" value="' + details[12] + '">';
+        newTd[13].innerHTML = '<input type="hidden" value="' + details[13] + '">';
+        newTd[14].innerHTML = '<input type="hidden" value="' + details[14] + '">';
+        newTd[15].innerHTML = '<input type="hidden" value="' + details[15] + '">';
+        newTd[16].innerHTML = '<input type="hidden" value="' + details[16] + '">';
+        newTd[17].innerHTML = '<input type="hidden" value="' + details[17] + '">';
 
 		var name = document.getElementById('name').value;
 		var tel = document.getElementById('tel').value;
@@ -506,15 +538,66 @@
 		var zongyouhui = 0;
 		for(var i = 1; i < rows; i++)
 		{
-			youhuiqianzongjine += parseFloat(results.rows[i].cells[7].innerHTML);
-			youhuihouzongjine += parseFloat(results.rows[i].cells[8].innerHTML);
-			zongyouhui += parseFloat(results.rows[i].cells[9].innerHTML);
+            if(results.rows[i].cells[0].firstChild.checked == true){
+                youhuiqianzongjine += parseFloat(results.rows[i].cells[7].innerHTML);
+                youhuihouzongjine += parseFloat(results.rows[i].cells[8].innerHTML);
+                zongyouhui += parseFloat(results.rows[i].cells[9].innerHTML);
+            }
 		}
 		document.getElementById("youhuiqianzongjine").innerHTML = Math.round(youhuiqianzongjine*100)/100;
 		document.getElementById("youhuihouzongjine").innerHTML = Math.round(youhuihouzongjine*100)/100;
 		document.getElementById("zongyouhui").innerHTML = Math.round(zongyouhui*100)/100;
 	}
 
+    //删除选中的方案
+    function shanchugouxuanfangan()
+    {
+		var results = document.getElementById("results");
+		var rows = results.rows.length;
+        for(var i = 1; i < rows; i++) {
+            if(results.rows[i].cells[0].firstChild.checked == true) {
+                results.deleteRow(i);
+                rows--;
+                i--;
+            }
+        }
+    }
+
+    //编辑选中的方案
+    function bianjigouxuanfangan()
+    {
+        var results = document.getElementById("results");
+        var rows = results.rows.length;
+        var edit_row = 0;
+        for(var i = 1; i < rows; i++) {
+            if(results.rows[i].cells[0].firstChild.checked == true) {
+                edit_row = i;
+                break;
+            }
+        }
+        if (edit_row == 0) {
+            return;
+        }
+
+        document.getElementById("taishu").value = results.rows[edit_row].cells[2].innerHTML;
+		document.getElementById('shifoubaoliuzhibaojin').checked = s2b(results.rows[edit_row].cells[6].innerHTML);
+		document.getElementById("dingshu").value = results.rows[edit_row].cells[10].firstChild.value;
+		document.getElementById("dingju").value = results.rows[edit_row].cells[11].firstChild.value;
+        document.getElementById("zhanju").value = results.rows[edit_row].cells[12].firstChild.value;
+        document.getElementById("jiaohuoqi").value = results.rows[edit_row].cells[13].firstChild.value;
+		document.getElementById('shoufu').value = results.rows[edit_row].cells[14].firstChild.value;
+		document.getElementById('fahuoqianfudao').value = results.rows[edit_row].cells[15].firstChild.value;
+		document.getElementById('anzhuangtiaoshiwan').value = results.rows[edit_row].cells[16].firstChild.value;
+
+		document.getElementById('youhuiqianzongjia').value = results.rows[edit_row].cells[8].innerHTML;
+		document.getElementById('shoufukuan').value = results.rows[edit_row].cells[3].innerHTML;
+		document.getElementById('fahuoqianzaifu').value = results.rows[edit_row].cells[4].innerHTML;
+		document.getElementById('anzhuangtiaoshiwanfukuan').value = results.rows[edit_row].cells[5].innerHTML;
+		document.getElementById('zhibaojin').value = results.rows[edit_row].cells[17].firstChild.value;
+		document.getElementById('youhuihouzongjia').value = results.rows[edit_row].cells[9].innerHTML;
+
+
+    }
 	//自动计算另一个的百分比
 	function calculate_percentage(id)
 	{
@@ -626,8 +709,23 @@
 		{
 			document.getElementById("taishutishi").innerHTML = "";
 		}
-
 	}
+
+    function b2s(shifoubaoliuzhibaojin)
+    {
+        if(shifoubaoliuzhibaojin)
+            return "保留";
+        else 
+            return "不保留";
+    }
+
+    function s2b(shifoubaoliuzhibaojin)
+    {
+        if(shifoubaoliuzhibaojin == "保留")
+            return true;
+        else
+            return false;
+    }
 </script>
 					</div>
 				</div>
