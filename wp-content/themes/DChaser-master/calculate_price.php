@@ -220,13 +220,13 @@
 			<th>优惠前总价</th>
 			<th>优惠后总价</th>
 			<th>优惠</th>
-            <th><input type="hidden" id="hidden_dingshu"></input><th>
-            <th><input type="hidden" id="hidden_dingju"></input><th>
-            <th><input type="hidden" id="hidden_zhanju"></input><th>
-            <th><input type="hidden" id="hidden_jiaohuoqi"></input><th>
-            <th><input type="hidden" id="hidden_shoufu"></input><th>
-            <th><input type="hidden" id="hidden_fahuoqianfudao"></input><th>
-            <th><input type="hidden" id="hidden_anzhuangtiaoshiwan"></input><th>
+            <th><input type="hidden" id="hidden_dingshu"></input></th>
+            <th><input type="hidden" id="hidden_dingju"></input></th>
+            <th><input type="hidden" id="hidden_zhanju"></input></th>
+            <th><input type="hidden" id="hidden_jiaohuoqi"></input></th>
+            <th><input type="hidden" id="hidden_shoufu"></input></th>
+            <th><input type="hidden" id="hidden_fahuoqianfudao"></input></th>
+            <th><input type="hidden" id="hidden_anzhuangtiaoshiwan"></input></th>
 		</tr>
 	</table>
 <!--</form>-->
@@ -429,7 +429,7 @@
 			for(var i = 1; i < rows; i++)
 			{
 				var flag = 0;
-				for(var j = 1; j < results.rows.item(0).cells.length - 1; j++)
+				for(var j = 1; j < 9; j++)
 				{
 					if(details[j] != results.rows[i].cells[j].innerHTML)
 					{
