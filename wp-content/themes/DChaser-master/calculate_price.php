@@ -399,7 +399,7 @@
 		var shoufukuan = document.getElementById("shoufukuan").value;
 		var fahuoqianzaifu = document.getElementById("fahuoqianzaifu").value;
 		var anzhuangtiaoshiwanfukuan = document.getElementById("anzhuangtiaoshiwanfukuan").value;
-		var zhibaojin = document.getElementById("zhibaojin").checked;
+		var zhibaojin = document.getElementById("zhibaojin").value;
 		var shifoubaoliuzhibaojin = document.getElementById("shifoubaoliuzhibaojin").checked;
 		var youhuiqianzongjia = document.getElementById("youhuiqianzongjia").value;
 		var youhuihouzongjia = document.getElementById("youhuihouzongjia").value;
