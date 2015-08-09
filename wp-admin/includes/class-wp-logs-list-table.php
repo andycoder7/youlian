@@ -263,7 +263,8 @@ class WP_Logs_List_Table extends WP_List_Table {
 			'name' => '姓名',
 			'ip'    => 'IP',
 			'city'     => '城市',
-			'create_time'    => '创建时间'
+			'create_time'    => '创建时间',
+			'details'    => '详细'
 		);
 
 		if ( $this->is_site_users )
@@ -328,6 +329,7 @@ class WP_Logs_List_Table extends WP_List_Table {
 							'<td>' . $value->ip . '</td>' .
 							'<td>' . $value->city . '</td>' .
 							'<td>' . $value->create_time . '</td>' .
+							'<td>' . '<a href="log-details.php?id=' . $value->id . '">详细</a>' . '</td>' .
 						'</tr>';
 		}
 	}
