@@ -329,7 +329,7 @@ class WP_Logs_List_Table extends WP_List_Table {
 							'<td>' . $value->ip . '</td>' .
 							'<td>' . $value->city . '</td>' .
 							'<td>' . $value->create_time . '</td>' .
-							'<td>' . '<a href="log-details.php?id=' . $value->id . '">详细</a>' . '</td>' .
+							'<td>' . '<a href="log-details.php?id=' . $value->id . '&wp_http_referer=' . urlencode(wp_unslash($_SERVER['REQUEST_URI'])) .'">详细</a>' . '</td>' .
 						'</tr>';
 		}
 	}
