@@ -43,7 +43,7 @@ class Youlian {
 						`dingju` varchar(5) DEFAULT NULL,
 						`zhanju` varchar(5) DEFAULT NULL,
 						`shoufu` varchar(5) DEFAULT NULL,
-						`fahuoqianfudao` varchar(5) DEFAULT NULL,
+						`fahuoqianzaifu` varchar(5) DEFAULT NULL,
 						`anzhuangtiaoshiwan` varchar(5) DEFAULT NULL,
 						`youhuiqianzongjia` double DEFAULT NULL,
 						`shoufukuan` double DEFAULT NULL,
